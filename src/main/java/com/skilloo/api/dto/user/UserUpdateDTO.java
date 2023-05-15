@@ -3,6 +3,8 @@ package com.skilloo.api.dto.user;
 import com.skilloo.api.entities.enuns.AreasEtec;
 import com.skilloo.api.entities.enuns.Contrato;
 import com.skilloo.api.entities.enuns.Role;
+import com.skilloo.api.services.validation.UserInsertValid;
+import com.skilloo.api.services.validation.UserUpdateValid;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -11,6 +13,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
+@UserUpdateValid
 public class UserUpdateDTO {
 
     @Size(min = 5, max = 60, message = "Deve ter entre 5 e 60 caracteres")
