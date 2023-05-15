@@ -1,0 +1,1 @@
+INSERT INTO tb_user(nome, email, senha, role, area, pontuacao, contrato) VALUES ('ETEC DE ITAQUERA', 'etecitaquera@etec.sp.gov.br', '$2a$12$6ULznb6WoZJGFkFYAdyVee160YL1IvNH56jw3.ieHKQxugU7RjdPW', 'ADMIN', null, null, null);

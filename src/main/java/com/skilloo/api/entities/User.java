@@ -4,10 +4,7 @@ import com.skilloo.api.entities.enuns.AreasEtec;
 import com.skilloo.api.entities.enuns.Contrato;
 import com.skilloo.api.entities.enuns.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "tb_user")
