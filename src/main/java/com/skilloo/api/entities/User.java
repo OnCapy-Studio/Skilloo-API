@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -35,13 +36,25 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private AreasEtec area;
     private Double pontuacao;
+    private String descricao;
 
     @Enumerated(EnumType.STRING)
     private Contrato contrato;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
+
+        List<GrantedAuthority> authorities = new ArrayList<>();
+
+        if(this.role.equals(Role.PROF)){
+            authorities.add(new SimpleGrantedAuthority("ROLE_PROF"));
+        }
+
+        if(this.role.equals(Role.ADMIN)){
+            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
+
+        return authorities;
     }
 
     @Override

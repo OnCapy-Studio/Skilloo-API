@@ -3,6 +3,7 @@ package com.skilloo.api.controllers.exceptions;
 import com.skilloo.api.controllers.exceptions.validation.ValidationError;
 import com.skilloo.api.services.exceptions.DataNotFoundException;
 import com.skilloo.api.services.exceptions.DatabaseException;
+import com.skilloo.api.services.exceptions.TokenException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,6 +64,22 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(status).body(error);
     }
 
+    @ExceptionHandler(TokenException.class)
+    public ResponseEntity<StandardError> validation(TokenException e, HttpServletRequest request){
+
+        HttpStatus status = HttpStatus.UNAUTHORIZED;
+
+        StandardError error = new StandardError();
+        error.setTimestamp(Instant.now());
+        error.setStatus(status.value());
+        error.setError("Validation Error");
+        error.setMessage(e.getMessage());
+        error.setPath(request.getRequestURI());
+
+
+        return ResponseEntity.status(status).body(error);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ValidationError> validation(MethodArgumentNotValidException e, HttpServletRequest request){
 
@@ -81,5 +98,4 @@ public class ControllerExceptionHandler {
 
         return ResponseEntity.status(status).body(error);
     }
-
 }

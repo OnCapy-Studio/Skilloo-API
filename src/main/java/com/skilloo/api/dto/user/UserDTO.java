@@ -24,6 +24,7 @@ public class UserDTO {
     private Role role;
     private AreasEtec area;
     private Double pontuacao;
+    private String descricao;
     private Contrato contrato;
 
     public UserDTO(User user){
@@ -33,6 +34,7 @@ public class UserDTO {
         role = user.getRole();
         area = user.getArea();
         pontuacao = user.getPontuacao();
+        descricao = user.getDescricao();
         contrato = user.getContrato();
     }
 }

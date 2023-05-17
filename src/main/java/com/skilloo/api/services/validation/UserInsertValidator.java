@@ -33,6 +33,8 @@ public class UserInsertValidator implements ConstraintValidator<UserInsertValid,
 
         //lógica para vefiricar se o email existe ou não
         var user = (User) userRepository.findByEmail(value.getEmail());
+
+        //caso volte um user
         if(user != null){
             list.add(new FieldMessage("Email", "Email já existente"));
         }

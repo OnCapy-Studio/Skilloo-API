@@ -31,16 +31,7 @@ public class UserController {
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @PostMapping
-    public ResponseEntity<UserDTO> insertUser(@RequestBody @Valid UserInsertDTO dto){
-
-        UserDTO newDto = service.insertUser(dto);
-
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(newDto.getId()).toUri();
-
-        return ResponseEntity.created(uri).body(newDto);
-    }
+    //o método de inserir user está no serviço de autenticação pelas diversas regras de validação
 
     @PutMapping("/{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody @Valid UserUpdateDTO dto){

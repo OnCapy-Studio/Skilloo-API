@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository repository;
@@ -39,6 +42,7 @@ public class UserService {
 
         Optional<User> user = repository.findById(id);
 
+        //caso o optional volte vazio
         if (user.isEmpty()){
             throw new DataNotFoundException("Id not found: " + id);
         }
@@ -68,6 +72,7 @@ public class UserService {
 
             return new UserDTO(user);
         }
+        //caso o .save() não ache a referencia pegada pelo getReferenceById(), é lançada uma exception
         catch (EntityNotFoundException e){
             throw new DataNotFoundException("Id not Found: " + id);
         }
@@ -95,6 +100,7 @@ public class UserService {
         user.setRole(dto.getRole());
         user.setArea(dto.getArea());
         user.setPontuacao(dto.getPontuacao());
+        user.setDescricao(dto.getDescricao());
         user.setContrato(dto.getContrato());
         user.setSenha(passwordEncoder.encode(dto.getSenha()));
     }
@@ -105,7 +111,13 @@ public class UserService {
         user.setRole(dto.getRole());
         user.setArea(dto.getArea());
         user.setPontuacao(dto.getPontuacao());
+        user.setDescricao(dto.getDescricao());
         user.setContrato(dto.getContrato());
         user.setSenha(passwordEncoder.encode(dto.getSenha()));
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return repository.findByEmail(email);
     }
 }

@@ -38,6 +38,9 @@ public class UserInsertDTO {
     @Min(1)
     private Double pontuacao;
 
+    @NotBlank
+    private String descricao;
+
     @NotNull(message = "Campo Requirido")
     private Contrato contrato;
 }
