@@ -48,4 +48,21 @@ public class TokenService {
             throw new TokenException("Token JWT inválido ou expirado");
         }
     }
+
+    //método para verificar se um token é valido, e retornar o id do usuário
+    public Long getId(String token) {
+        try{
+            Algorithm algorithm = Algorithm.HMAC256(secret);
+
+            return JWT.require(algorithm)
+                    .withIssuer("skilloo-api")
+                    .build()
+                    .verify(token)// verificar se o token é valido de acordo com o algoritmo e com a issuer
+                    .getClaim("Id").asLong();// caso seja valido, retorne o id;
+        }
+
+        catch (JWTVerificationException e){
+            throw new TokenException("Token JWT inválido ou expirado");
+        }
+    }
 }
