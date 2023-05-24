@@ -1,13 +1,16 @@
 package com.skilloo.api.controllers;
 
+import com.skilloo.api.dto.aula.AulaDTO;
+import com.skilloo.api.services.AulaService;
 import com.skilloo.api.services.auth.TokenService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/home")
@@ -19,11 +22,14 @@ public class HomeController {
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
+    private AulaService aulasService;
+
     @GetMapping
-    public ResponseEntity buscarDadosHome(){
+    public ResponseEntity<List<AulaDTO>> buscarDadosHome(){
 
-        String token = request.getHeader("Authorization").replace("Bearer ", "");
+        Long idUser = tokenService.getIdFromRequest();
 
-        return ResponseEntity.ok(tokenService.getId(token));
+        return ResponseEntity.ok(aulasService.buscarAulasDoDia(idUser));
     }
 }

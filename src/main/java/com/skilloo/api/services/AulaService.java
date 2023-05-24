@@ -4,6 +4,7 @@ package com.skilloo.api.services;
 import com.skilloo.api.dto.aula.AulaDTO;
 import com.skilloo.api.entities.Aula;
 import com.skilloo.api.repositories.AulaRepository;
+import com.skilloo.api.services.exceptions.NenhumaAulaAtribuidaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +15,7 @@ import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 @Service
-public class AulasService {
+public class AulaService {
 
     @Autowired
     private AulaRepository aulaRepository;
@@ -22,13 +23,23 @@ public class AulasService {
     @Transactional
     public List<AulaDTO> buscarAulasDoDia(Long idUser){
 
-        //definindo o presente diia
+        //definindo o presente dia
         int dia = definirDia();
 
         //buscando as aulas do professor
         List<Aula> aulas = aulaRepository.findAllByProfessorId(idUser);
 
-        return aulas.stream().filter(aula -> aula.getDia().getValue() == dia).map(AulaDTO::new).collect(Collectors.toList());
+        //filtrando as aulas pelo dia atual e transformando em DTO
+        List<AulaDTO> aulaDTOS = aulas.stream().filter(aula -> aula.getDia().getValue() == dia).map(AulaDTO::new).toList();
+
+        if(aulaDTOS.isEmpty()){
+            throw new NenhumaAulaAtribuidaException("Você não tem aulas atribuidas para hoje.");
+        }
+        return aulaDTOS;
+    }
+
+    public void deletarAulasPorProfessor(Long idUser){
+        aulaRepository.deleteByProfessorId(idUser);
     }
 
 

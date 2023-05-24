@@ -6,6 +6,8 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.skilloo.api.entities.User;
 import com.skilloo.api.services.exceptions.TokenException;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,9 @@ public class TokenService {
 
     @Value("${api.security.token.secret")
     private String secret;
+
+    @Autowired
+    private HttpServletRequest request;
 
     //método para gerar token
     public String gerarToken(User user){
@@ -64,5 +69,10 @@ public class TokenService {
         catch (JWTVerificationException e){
             throw new TokenException("Token JWT inválido ou expirado");
         }
+    }
+
+    public Long getIdFromRequest(){
+        String token = request.getHeader("Authorization").replace("Bearer ", "");
+        return getId(token);
     }
 }

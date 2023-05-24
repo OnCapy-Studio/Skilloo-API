@@ -4,6 +4,8 @@ import com.skilloo.api.dto.user.UserDTO;
 import com.skilloo.api.dto.user.UserInsertDTO;
 import com.skilloo.api.dto.user.UserUpdateDTO;
 import com.skilloo.api.entities.User;
+import com.skilloo.api.entities.enuns.Role;
+import com.skilloo.api.repositories.AulaRepository;
 import com.skilloo.api.repositories.UserRepository;
 import com.skilloo.api.services.exceptions.DataNotFoundException;
 import com.skilloo.api.services.exceptions.DatabaseException;
@@ -28,12 +30,16 @@ public class UserService implements UserDetailsService {
     private UserRepository repository;
 
     @Autowired
+    private AulaRepository aulaRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Transactional(readOnly = true)
     public Page<UserDTO> findAll(Pageable pageable){
 
-        Page<User> users = repository.findAll(pageable);
+        Page<User> users = repository.findAllByRole(Role.PROF, pageable);
+
         return users.map(UserDTO::new);
     }
 
@@ -81,17 +87,15 @@ public class UserService implements UserDetailsService {
     @Transactional
     public void deleteUser(Long id) {
 
-        try{
-            Optional<User> user = repository.findById(id);
+        Optional<User> user = repository.findById(id);
 
-            if(user.isEmpty()){
-                throw new DataNotFoundException("Id not Found: " + id);
-            }
-            repository.deleteById(id);
+        if(user.isEmpty()){
+            throw new DataNotFoundException("Id not Found: " + id);
         }
-        catch (DataIntegrityViolationException e){
-            throw new DatabaseException("Integraty Violation");
-        }
+
+        aulaRepository.deleteByProfessorId(id);
+        repository.deleteById(id);
+
     }
 
     private void copyDtoToEntity(UserInsertDTO dto, User user) {

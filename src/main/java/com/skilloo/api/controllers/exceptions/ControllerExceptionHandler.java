@@ -3,11 +3,15 @@ package com.skilloo.api.controllers.exceptions;
 import com.skilloo.api.controllers.exceptions.validation.ValidationError;
 import com.skilloo.api.services.exceptions.DataNotFoundException;
 import com.skilloo.api.services.exceptions.DatabaseException;
+import com.skilloo.api.services.exceptions.NenhumaAulaAtribuidaException;
 import com.skilloo.api.services.exceptions.TokenException;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -17,6 +21,24 @@ import java.time.Instant;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {
+
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<StandardError> dataNotFound(RuntimeException e, HttpServletRequest request){
+
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+
+        StandardError error = new StandardError();
+        error.setTimestamp(Instant.now());
+        error.setStatus(status.value());
+        error.setError("Internal Error: " + e.getClass());
+        error.setMessage(e.getMessage());
+        error.setPath(request.getRequestURI());
+
+        return ResponseEntity.status(status).body(error);
+    }
+
+
 
     @ExceptionHandler(DataNotFoundException.class)
     public ResponseEntity<StandardError> dataNotFound(DataNotFoundException e, HttpServletRequest request){
@@ -33,15 +55,62 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(status).body(error);
     }
 
-    @ExceptionHandler(DatabaseException.class)
-    public ResponseEntity<StandardError> databaseException(DatabaseException e, HttpServletRequest request){
+    @ExceptionHandler(InternalAuthenticationServiceException.class)
+    public ResponseEntity<StandardError> loginError(InternalAuthenticationServiceException e, HttpServletRequest request){
+
+        HttpStatus status = HttpStatus.NOT_FOUND;
+
+        StandardError error = new StandardError();
+        error.setTimestamp(Instant.now());
+        error.setStatus(status.value());
+        error.setError("Data not found!");
+        error.setMessage("Email ou Senha está incorreto: "+e.getMessage());
+        error.setPath(request.getRequestURI());
+
+        return ResponseEntity.status(status).body(error);
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<StandardError> loginError(BadCredentialsException e, HttpServletRequest request){
+
+        HttpStatus status = HttpStatus.NOT_FOUND;
+
+        StandardError error = new StandardError();
+        error.setTimestamp(Instant.now());
+        error.setStatus(status.value());
+        error.setError("Data not found!");
+        error.setMessage("Email ou Senha está incorreto: "+e.getMessage());
+        error.setPath(request.getRequestURI());
+
+        return ResponseEntity.status(status).body(error);
+    }
+
+
+    @ExceptionHandler(NenhumaAulaAtribuidaException.class)
+    public ResponseEntity<StandardError> nenhumaAulaAtribuida(NenhumaAulaAtribuidaException e, HttpServletRequest request){
+
+        HttpStatus status = HttpStatus.NOT_FOUND;
+
+        StandardError error = new StandardError();
+        error.setTimestamp(Instant.now());
+        error.setStatus(status.value());
+        error.setError("Nenhuma Aula Encontrada");
+        error.setMessage(e.getMessage());
+        error.setPath(request.getRequestURI());
+
+
+        return ResponseEntity.status(status).body(error);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<StandardError> databaseException(DataIntegrityViolationException e, HttpServletRequest request){
 
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
         StandardError error = new StandardError();
         error.setTimestamp(Instant.now());
         error.setStatus(status.value());
-        error.setError("Database Exception!");
+        error.setError("Database Integrity Violation Exception!");
         error.setMessage(e.getMessage());
         error.setPath(request.getRequestURI());
 

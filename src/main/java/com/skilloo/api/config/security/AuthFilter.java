@@ -7,6 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -37,6 +38,10 @@ public class AuthFilter extends OncePerRequestFilter {
 
             //busque o usuário pelo subject(email)
             var user = userRepository.findByEmail(subject);
+
+            if(user == null){
+                throw new BadCredentialsException("Data not found");
+            }
 
             // confirmando a autenticação
             var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities()); //criando as credenciais

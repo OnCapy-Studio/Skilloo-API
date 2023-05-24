@@ -41,6 +41,10 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Contrato contrato;
 
+    //relações
+    @OneToMany(mappedBy = "professor")
+    private List<Aula> aulas = new ArrayList<>();
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
