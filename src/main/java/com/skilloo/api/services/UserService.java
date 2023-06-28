@@ -36,7 +36,7 @@ public class UserService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     @Transactional(readOnly = true)
-    public Page<UserDTO> findAll(Pageable pageable){
+    public Page<UserDTO> findAllProfessores(Pageable pageable){
 
         Page<User> users = repository.findAllByRole(Role.PROF, pageable);
 
@@ -57,7 +57,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public UserDTO insertUser(UserInsertDTO dto) {
+    public UserDTO insertProfessor(UserInsertDTO dto) {
 
         User user = new User();
         copyDtoToEntity(dto, user);
@@ -68,7 +68,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public UserDTO updateUser(Long id, UserUpdateDTO dto) {
+    public UserDTO updateProfessor(Long id, UserUpdateDTO dto) {
 
         try{
             User user = repository.getReferenceById(id);
@@ -85,7 +85,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public void deleteUser(Long id) {
+    public void deleteProfessor(Long id) {
 
         Optional<User> user = repository.findById(id);
 

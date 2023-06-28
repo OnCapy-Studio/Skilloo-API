@@ -15,15 +15,15 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/professores")
 public class UserController {
 
     @Autowired
     private UserService service;
 
     @GetMapping
-    public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable){
-        return ResponseEntity.ok(service.findAll(pageable));
+    public ResponseEntity<Page<UserDTO>> findAllProfessores(Pageable pageable){
+        return ResponseEntity.ok(service.findAllProfessores(pageable));
     }
 
     @GetMapping("/{id}")
@@ -34,13 +34,13 @@ public class UserController {
     //o método de inserir user está no serviço de autenticação pelas diversas regras de validação
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody @Valid UserUpdateDTO dto){
-        return ResponseEntity.ok(service.updateUser(id, dto));
+    public ResponseEntity<UserDTO> updateProfessor(@PathVariable Long id, @RequestBody @Valid UserUpdateDTO dto){
+        return ResponseEntity.ok(service.updateProfessor(id, dto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id){
-        service.deleteUser(id);
+    public ResponseEntity<Void> deleteProfessor(@PathVariable Long id){
+        service.deleteProfessor(id);
         return ResponseEntity.noContent().build();
     }
 }

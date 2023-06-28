@@ -1,3 +1,4 @@
+INSERT INTO tb_user(nome, email, senha, role, area, pontuacao, descricao, contrato) VALUES ('Etec de Itaquera', 'etecdeitaquera@etec.sp.gov.br', '$2a$12$1TbfyGlg.Eb.qwwFPAg2E.9efzxhIR2ZHaigyLDdLB5pJFLzUtEDO', 'ADMIN', null, null, 'Coordenação da Etec de Itaquera', null);
 INSERT INTO tb_user(nome, email, senha, role, area, pontuacao, descricao, contrato) VALUES ('Djalma Espedito de Lima', 'djalma@etec.sp.gov.br', '$2a$12$vQEq6qZPOcM4QwWjj0moFumMsv4ZQZqnOo.JymPY18NOynjyvyOsS', 'PROF', 'BASE_COMUM', 1500.0, 'Doutorado em Letras', 'CLT');
 INSERT INTO tb_user(nome, email, senha, role, area, pontuacao, descricao, contrato) VALUES ('Alexandre Crivelaro da Fonseca', 'alexandre@etec.sp.gov.br', '$2a$12$rLkTHHduHqhw.DubIsSrwepfABp48JAOW8M7w7NuQF.0yLDtsCp0K', 'PROF', 'DS', 1500.0, 'Doutorado em Tecnologia', 'CLT');
 
