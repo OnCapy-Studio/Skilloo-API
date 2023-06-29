@@ -1,25 +1,21 @@
-package com.skilloo.api.controllers;
+package com.skilloo.api.controllers.gestao;
 
 import com.skilloo.api.dto.user.UserDTO;
-import com.skilloo.api.dto.user.UserInsertDTO;
 import com.skilloo.api.dto.user.UserUpdateDTO;
-import com.skilloo.api.services.UserService;
+import com.skilloo.api.services.ProfessorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
 
 @RestController
 @RequestMapping("/professores")
-public class UserController {
+public class ProfessorController {
 
     @Autowired
-    private UserService service;
+    private ProfessorService service;
 
     @GetMapping
     public ResponseEntity<Page<UserDTO>> findAllProfessores(Pageable pageable){

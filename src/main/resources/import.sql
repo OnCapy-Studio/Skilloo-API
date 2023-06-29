@@ -33,3 +33,8 @@ INSERT INTO aula(materia, dia, horario, professor, turma) VALUES('LPL', 'THURSDA
 INSERT INTO aula(materia, dia, horario, professor, turma) VALUES('LPL', 'FRIDAY', '08:40:00', 1, 4);
 INSERT INTO aula(materia, dia, horario, professor, turma) VALUES('LPL', 'FRIDAY', '09:50:00', 1, 3);
 INSERT INTO aula(materia, dia, horario, professor, turma) VALUES('LPL', 'FRIDAY', '11:30:00', 1, 5);
+
+INSERT INTO ticket_suporte(titulo, lab, descricao, status, professor) VALUES('PC sem Funcionar', 'Lab 3', 'Processador do PC parou de funcionar. 2 fileira, PC 3', 'PARA_RESOLVER', 2);
+INSERT INTO ticket_suporte(titulo, lab, descricao, status, professor) VALUES('Monitor sem Funcionar', 'Lab 3', 'Monitor parou de funcionar. 2 fileira, PC 3', 'EM_ANDAMENTO', 2);
+INSERT INTO ticket_suporte(titulo, lab, descricao, status, professor) VALUES('Datashow pifou', 'Sala 6', 'Datashow foi de submarino, de comes e bebes', 'PARA_RESOLVER', 3);
+INSERT INTO ticket_suporte(titulo, lab, descricao, status, professor) VALUES('Tomada explodiu', 'Sala 2', 'Ligaram e explodiu', 'PARA_RESOLVER', 3);

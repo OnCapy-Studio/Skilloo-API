@@ -45,6 +45,9 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "professor")
     private List<Aula> aulas = new ArrayList<>();
 
+    @OneToMany(mappedBy = "professor")
+    private List<TicketSuporte> tickets = new ArrayList<>();
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 

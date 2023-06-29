@@ -6,12 +6,10 @@ import com.skilloo.api.dto.user.UserUpdateDTO;
 import com.skilloo.api.entities.User;
 import com.skilloo.api.entities.enuns.Role;
 import com.skilloo.api.repositories.AulaRepository;
-import com.skilloo.api.repositories.UserRepository;
+import com.skilloo.api.repositories.ProfessorRepository;
 import com.skilloo.api.services.exceptions.DataNotFoundException;
-import com.skilloo.api.services.exceptions.DatabaseException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,10 +22,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-public class UserService implements UserDetailsService {
+public class ProfessorService implements UserDetailsService {
 
     @Autowired
-    private UserRepository repository;
+    private ProfessorRepository repository;
 
     @Autowired
     private AulaRepository aulaRepository;

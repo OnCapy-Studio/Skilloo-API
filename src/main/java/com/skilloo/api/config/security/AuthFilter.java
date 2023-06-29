@@ -1,6 +1,6 @@
 package com.skilloo.api.config.security;
 
-import com.skilloo.api.repositories.UserRepository;
+import com.skilloo.api.repositories.ProfessorRepository;
 import com.skilloo.api.services.auth.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -22,7 +22,7 @@ public class AuthFilter extends OncePerRequestFilter {
     private TokenService tokenService;
 
     @Autowired
-    private UserRepository userRepository;
+    private ProfessorRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

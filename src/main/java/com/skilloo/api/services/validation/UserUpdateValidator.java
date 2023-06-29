@@ -1,10 +1,9 @@
 package com.skilloo.api.services.validation;
 
 import com.skilloo.api.controllers.exceptions.validation.FieldMessage;
-import com.skilloo.api.dto.user.UserInsertDTO;
 import com.skilloo.api.dto.user.UserUpdateDTO;
 import com.skilloo.api.entities.User;
-import com.skilloo.api.repositories.UserRepository;
+import com.skilloo.api.repositories.ProfessorRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
@@ -18,7 +17,7 @@ import java.util.Map;
 public class UserUpdateValidator implements ConstraintValidator<UserUpdateValid, UserUpdateDTO> {
 
     @Autowired
-    private UserRepository userRepository;
+    private ProfessorRepository userRepository;
 
     @Autowired
     private HttpServletRequest request;

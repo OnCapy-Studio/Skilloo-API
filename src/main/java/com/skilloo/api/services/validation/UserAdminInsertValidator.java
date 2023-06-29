@@ -3,7 +3,7 @@ package com.skilloo.api.services.validation;
 import com.skilloo.api.controllers.exceptions.validation.FieldMessage;
 import com.skilloo.api.dto.user.admin.UserAdminInsertDTO;
 import com.skilloo.api.entities.User;
-import com.skilloo.api.repositories.UserRepository;
+import com.skilloo.api.repositories.ProfessorRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.List;
 public class UserAdminInsertValidator implements ConstraintValidator<UserAdminInsertValid, UserAdminInsertDTO> {
 
     @Autowired
-    private UserRepository userRepository;
+    private ProfessorRepository userRepository;
 
     @Override
     public void initialize(UserAdminInsertValid constraintAnnotation) {

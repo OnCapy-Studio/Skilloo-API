@@ -6,7 +6,7 @@ import com.skilloo.api.dto.user.admin.UserAdminInsertDTO;
 import com.skilloo.api.dto.user.UserLoginDTO;
 import com.skilloo.api.entities.User;
 import com.skilloo.api.entities.enuns.Role;
-import com.skilloo.api.repositories.UserRepository;
+import com.skilloo.api.repositories.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,7 +20,7 @@ public class AuthService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private UserRepository userRepository;
+    private ProfessorRepository userRepository;
 
     @Autowired
     private TokenService tokenService;
