@@ -38,3 +38,7 @@ INSERT INTO ticket_suporte(titulo, lab, descricao, status, professor) VALUES('PC
 INSERT INTO ticket_suporte(titulo, lab, descricao, status, professor) VALUES('Monitor sem Funcionar', 'Lab 3', 'Monitor parou de funcionar. 2 fileira, PC 3', 'EM_ANDAMENTO', 2);
 INSERT INTO ticket_suporte(titulo, lab, descricao, status, professor) VALUES('Datashow pifou', 'Sala 6', 'Datashow foi de submarino, de comes e bebes', 'PARA_RESOLVER', 3);
 INSERT INTO ticket_suporte(titulo, lab, descricao, status, professor) VALUES('Tomada explodiu', 'Sala 2', 'Ligaram e explodiu', 'PARA_RESOLVER', 3);
+
+INSERT INTO sala(nome) VALUES('SALA 3');
+INSERT INTO sala(nome) VALUES('SALA 6');
+INSERT INTO sala(nome) VALUES('SALA 9');
