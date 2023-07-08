@@ -42,3 +42,7 @@ INSERT INTO ticket_suporte(titulo, lab, descricao, status, professor) VALUES('To
 INSERT INTO sala(nome) VALUES('SALA 3');
 INSERT INTO sala(nome) VALUES('SALA 6');
 INSERT INTO sala(nome) VALUES('SALA 9');
+
+INSERT INTO lab(nome) VALUES('LABORATÓRIO 1');
+INSERT INTO lab(nome) VALUES('LABORATÓRIO 2');
+INSERT INTO lab(nome) VALUES('LABORATÓRIO 3');

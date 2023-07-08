@@ -1,4 +1,4 @@
-package com.skilloo.api.controllers;
+package com.skilloo.api.controllers.gestao;
 
 import com.skilloo.api.dto.SalaDTO;
 import com.skilloo.api.services.SalaService;
