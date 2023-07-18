@@ -1,7 +1,6 @@
 package com.skilloo.api.controllers.gestao;
 
 import com.skilloo.api.dto.LabDTO;
-import com.skilloo.api.dto.SalaDTO;
 import com.skilloo.api.services.LabService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

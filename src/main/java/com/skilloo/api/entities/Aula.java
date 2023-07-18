@@ -20,7 +20,6 @@ public class Aula {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String materia;
     @Enumerated(EnumType.STRING)
     private DayOfWeek dia;
     private LocalTime horario;
@@ -32,4 +31,9 @@ public class Aula {
     @ManyToOne
     @JoinColumn(name = "turma")
     private Turma turma;
+
+
+    @ManyToOne
+    @JoinColumn(name = "materia")
+    private Materia materia;
 }

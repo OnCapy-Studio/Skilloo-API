@@ -6,6 +6,7 @@ import com.skilloo.api.entities.Aula;
 import com.skilloo.api.repositories.AulaRepository;
 import com.skilloo.api.services.exceptions.NenhumaAulaAtribuidaException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,6 +41,14 @@ public class AulaService {
 
     public void deletarAulasPorProfessor(Long idUser){
         aulaRepository.deleteByProfessorId(idUser);
+    }
+
+    @Transactional
+    public boolean verificarSeProfessorTemAulasComUmaTurma(Long idUser, Long idTurma, Long idMateria){
+
+        //false - ele nao tem aulas
+        //true - ele tem aulas
+        return !(aulaRepository.verificarSeProfessorTemAulaComUmaTurma(idUser, idTurma, idMateria).isEmpty());
     }
 
 

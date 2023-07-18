@@ -1,4 +1,4 @@
-package com.skilloo.api.services;
+package com.skilloo.api.services.gestao;
 
 import com.skilloo.api.dto.user.UserDTO;
 import com.skilloo.api.dto.user.UserInsertDTO;

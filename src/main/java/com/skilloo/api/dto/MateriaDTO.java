@@ -1,7 +1,6 @@
 package com.skilloo.api.dto;
 
-import com.skilloo.api.entities.Sala;
-import jakarta.validation.constraints.NotBlank;
+import com.skilloo.api.entities.Materia;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,14 +10,13 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class SalaDTO {
+public class MateriaDTO {
 
     private Long id;
-    @NotBlank
     private String nome;
 
-    public SalaDTO(Sala entity){
-        id = entity.getId();
-        nome = entity.getNome();
+    public MateriaDTO(Materia materia) {
+        id = materia.getId();;
+        nome = materia.getNome();
     }
 }

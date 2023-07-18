@@ -2,7 +2,7 @@ package com.skilloo.api.controllers.gestao;
 
 import com.skilloo.api.dto.user.UserDTO;
 import com.skilloo.api.dto.user.UserUpdateDTO;
-import com.skilloo.api.services.ProfessorService;
+import com.skilloo.api.services.gestao.ProfessorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

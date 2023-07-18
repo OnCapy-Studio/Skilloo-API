@@ -3,10 +3,7 @@ package com.skilloo.api.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.skilloo.api.entities.enuns.Periodo;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Turma {
 
     @Id
@@ -29,4 +27,5 @@ public class Turma {
     @OneToMany(mappedBy = "turma")
     @JsonIgnore
     private List<Aula> aulas = new ArrayList<>();
+
 }
