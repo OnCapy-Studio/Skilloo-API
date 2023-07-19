@@ -49,6 +49,9 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "professor")
     private List<TicketSuporte> tickets = new ArrayList<>();
 
+    @OneToMany(mappedBy = "autor")
+    private List<Task> tasks = new ArrayList<>();
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

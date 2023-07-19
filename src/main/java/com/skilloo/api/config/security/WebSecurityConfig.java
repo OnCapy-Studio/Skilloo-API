@@ -42,6 +42,7 @@ public class WebSecurityConfig {
                 .requestMatchers("/turmas/**").hasRole("ADMIN")
                 .requestMatchers("/home/**").hasRole("PROF")
                 .requestMatchers("/minhasTurmas/**").hasRole("PROF")
+                .requestMatchers("/minhasTasks/**").hasRole("PROF")
                 .anyRequest().authenticated()
 
                 .and()

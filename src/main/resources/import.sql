@@ -66,3 +66,8 @@ INSERT INTO ticket_suporte(titulo, lab, descricao, status, professor) VALUES('To
 INSERT INTO lab(nome) VALUES('LABORATÓRIO 1');
 INSERT INTO lab(nome) VALUES('LABORATÓRIO 2');
 INSERT INTO lab(nome) VALUES('LABORATÓRIO 3');
+
+INSERT INTO task(titulo, prazo, anotacao, status, autor) VALUES('Corrigir redações enem', '2023-02-28 13:00:00', 'Tema: Seria Abel Ferreira o maior português que pisou no brasil?','TO_DO', 2);
+INSERT INTO task(titulo, prazo, anotacao, status, autor) VALUES('Ler machado de assis', '2023-02-28 12:00:00', 'Estou na Pag 80', 'DOING', 2);
+INSERT INTO task(titulo, prazo, anotacao, status, autor) VALUES('Trocar Ryzen do meu pc', '2023-03-18 20:00:00', 'O meu R3 ta horrivel', 'TO_DO', 3);
+INSERT INTO task(titulo, prazo, anotacao, status, autor) VALUES('Corrigir atv do Tinkercad', '2023-03-30 13:00:00', 'Atv do Serial Monitor', 'DONE', 3);
