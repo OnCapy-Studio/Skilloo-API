@@ -14,7 +14,6 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Aula {
 
     @Id
@@ -36,4 +35,7 @@ public class Aula {
     @ManyToOne
     @JoinColumn(name = "materia")
     private Materia materia;
+
+    @OneToOne(mappedBy = "aula")
+    private Reserva reserva;
 }

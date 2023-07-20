@@ -5,6 +5,7 @@ import com.skilloo.api.services.AulaService;
 import com.skilloo.api.services.auth.TokenService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,7 @@ public class HomeController {
     private AulaService aulasService;
 
     @GetMapping
-    public ResponseEntity<List<AulaDTO>> buscarDadosHome(){
+    public ResponseEntity<Page<AulaDTO>> buscarDadosHome(){
 
         Long idUser = tokenService.getIdFromRequest();
 

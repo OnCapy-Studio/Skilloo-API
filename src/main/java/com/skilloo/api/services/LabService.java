@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -26,7 +27,7 @@ public class LabService {
 
     @Transactional
     public LabDTO insertLab(LabDTO dto) {
-        Lab lab = new Lab(null, dto.getNome());
+        Lab lab = new Lab(null, dto.getNome(), new ArrayList<>());
         return new LabDTO(repository.save(lab));
     }
 

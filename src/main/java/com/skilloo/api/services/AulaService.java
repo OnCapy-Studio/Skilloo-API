@@ -2,18 +2,25 @@ package com.skilloo.api.services;
 
 
 import com.skilloo.api.dto.aula.AulaDTO;
+import com.skilloo.api.dto.user.UserDTO;
 import com.skilloo.api.entities.Aula;
+import com.skilloo.api.entities.User;
 import com.skilloo.api.repositories.AulaRepository;
+import com.skilloo.api.services.exceptions.DataNotFoundException;
+import com.skilloo.api.services.exceptions.NaoAutorizadoException;
 import com.skilloo.api.services.exceptions.NenhumaAulaAtribuidaException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.DayOfWeek;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 import java.util.TimeZone;
-import java.util.stream.Collectors;
 
 @Service
 public class AulaService {
@@ -22,7 +29,36 @@ public class AulaService {
     private AulaRepository aulaRepository;
 
     @Transactional
-    public List<AulaDTO> buscarAulasDoDia(Long idUser){
+    public AulaDTO findById(Long id){
+
+        Optional<Aula> aula = aulaRepository.findById(id);
+
+        //caso o optional volte vazio
+        if (aula.isEmpty()){
+            throw new DataNotFoundException("Id not found: " + id);
+        }
+
+        return new AulaDTO(aula.get());
+    }
+
+    @Transactional
+    public void verificarSeProfessorEDocenteDaAula(Long idAula, Long idProfessor){
+
+        Optional<Aula> aula = aulaRepository.findById(idAula);
+
+        //caso o optional volte vazio
+        if (aula.isEmpty()){
+            throw new DataNotFoundException("Id not found: " + idAula);
+        }
+
+        if (aula.get().getProfessor().getId() != idProfessor){
+            throw new NaoAutorizadoException("Você não é o docente desta aula!");
+        }
+
+    }
+
+    @Transactional
+    public Page<AulaDTO> buscarAulasDoDia(Long idUser){
 
         //definindo o presente dia
         int dia = definirDia();
@@ -36,7 +72,7 @@ public class AulaService {
         if(aulaDTOS.isEmpty()){
             throw new NenhumaAulaAtribuidaException("Você não tem aulas atribuidas para hoje.");
         }
-        return aulaDTOS;
+        return new PageImpl<>(aulaDTOS);
     }
 
     public void deletarAulasPorProfessor(Long idUser){
@@ -51,9 +87,15 @@ public class AulaService {
         return !(aulaRepository.verificarSeProfessorTemAulaComUmaTurma(idUser, idTurma, idMateria).isEmpty());
     }
 
+    @Transactional
+    public Page<AulaDTO> buscarAulasPorDia(DayOfWeek diaDaSemana, Long idUser, Pageable pageable) {
+
+        return aulaRepository.buscarAulasPorDia(diaDaSemana, idUser, pageable).map(AulaDTO::new);
+    }
 
 
     //método para buscar em número inteiro a representação do dia de hj
+
     private int definirDia() {
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("America/Sao_Paulo"));
         int day = cal.get(Calendar.DAY_OF_WEEK) - 1;

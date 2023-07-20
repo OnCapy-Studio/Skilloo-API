@@ -1,5 +1,7 @@
 package com.skilloo.api.dto.aula;
 
+import com.skilloo.api.dto.MateriaDTO;
+import com.skilloo.api.dto.TurmaDTO;
 import com.skilloo.api.entities.Aula;
 import com.skilloo.api.entities.Materia;
 import com.skilloo.api.entities.Turma;
@@ -11,6 +13,7 @@ import lombok.Setter;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,16 +22,16 @@ import java.time.LocalDate;
 public class AulaDTO {
 
     private Long id;
-    private Materia materia;
     private DayOfWeek dia;
-    private String horario;
-    private Turma turma;
+    private LocalTime horario;
+    private MateriaDTO materia;
+    private TurmaDTO turma;
 
     public AulaDTO(Aula aula) {
         id = aula.getId();
-        materia = aula.getMateria();
+        materia = new MateriaDTO(aula.getMateria());
         dia = aula.getDia();
-        horario = aula.getHorario().toString();
-        turma = aula.getTurma();
+        horario = aula.getHorario();
+        turma = new TurmaDTO(aula.getTurma());
     }
 }
