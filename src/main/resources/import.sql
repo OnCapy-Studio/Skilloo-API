@@ -14,11 +14,11 @@ INSERT INTO turma(nome, periodo) VALUES('2º DS-B', 'MANHA');
 INSERT INTO turma(nome, periodo) VALUES('3º DS-A', 'MANHA');
 INSERT INTO turma(nome, periodo) VALUES('3º DS-B', 'MANHA');
 
-INSERT INTO materia(nome) VALUES('PDTCC');
-INSERT INTO materia(nome) VALUES('LPL');
-INSERT INTO materia(nome) VALUES('BANCO DE DADOS II');
-INSERT INTO materia(nome) VALUES('DESENVOLVIMENTO DE SISTEMAS');
-INSERT INTO materia(nome) VALUES('TECNICAS DE PROGRAMAÇÃO E ALGORITMOS');
+INSERT INTO materia(nome, area) VALUES('PDTCC', 'BASE_COMUM');
+INSERT INTO materia(nome, area) VALUES('LPL', 'BASE_COMUM');
+INSERT INTO materia(nome, area) VALUES('BANCO DE DADOS II', 'DS');
+INSERT INTO materia(nome, area) VALUES('DESENVOLVIMENTO DE SISTEMAS', 'DS');
+INSERT INTO materia(nome, area) VALUES('TECNICAS DE PROGRAMAÇÃO E ALGORITMOS', 'DS');
 
 INSERT INTO aula(materia, dia, horario, professor, turma) VALUES(1, 'MONDAY', '09:50:00', 2, 8);
 INSERT INTO aula(materia, dia, horario, professor, turma) VALUES(1, 'MONDAY', '10:40:00', 2, 8);

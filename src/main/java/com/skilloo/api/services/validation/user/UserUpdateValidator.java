@@ -1,4 +1,4 @@
-package com.skilloo.api.services.validation;
+package com.skilloo.api.services.validation.user;
 
 import com.skilloo.api.controllers.exceptions.validation.FieldMessage;
 import com.skilloo.api.dto.user.UserUpdateDTO;

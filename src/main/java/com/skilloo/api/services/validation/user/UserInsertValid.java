@@ -1,4 +1,4 @@
-package com.skilloo.api.services.validation;
+package com.skilloo.api.services.validation.user;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -8,10 +8,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = UserAdminInsertValidator.class)
+@Constraint(validatedBy = UserInsertValidator.class)
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface UserAdminInsertValid {
+public @interface UserInsertValid {
     String message() default "Validation error";
 
     Class<?>[] groups() default {};

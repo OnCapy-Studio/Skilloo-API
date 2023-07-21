@@ -1,9 +1,12 @@
-package com.skilloo.api.services.validation;
+package com.skilloo.api.services.validation.turma;
 
 import com.skilloo.api.controllers.exceptions.validation.FieldMessage;
-import com.skilloo.api.dto.user.UserInsertDTO;
-import com.skilloo.api.entities.User;
-import com.skilloo.api.repositories.ProfessorRepository;
+import com.skilloo.api.dto.MateriaDTO;
+import com.skilloo.api.dto.TurmaDTO;
+import com.skilloo.api.entities.Materia;
+import com.skilloo.api.entities.Turma;
+import com.skilloo.api.repositories.MateriaRepository;
+import com.skilloo.api.repositories.TurmaRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,30 +14,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserInsertValidator implements ConstraintValidator<UserInsertValid, UserInsertDTO> {
+public class TurmaValidator implements ConstraintValidator<TurmaValid, TurmaDTO> {
 
     @Autowired
-    private ProfessorRepository userRepository;
+    private TurmaRepository turmaRepository;
 
 
     @Override
-    public void initialize(UserInsertValid constraintAnnotation) {
+    public void initialize(TurmaValid constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
     @Override
-    public boolean isValid(UserInsertDTO value, ConstraintValidatorContext context) {
+    public boolean isValid(TurmaDTO dto, ConstraintValidatorContext context) {
 
         //lista de erros
         List<FieldMessage> list = new ArrayList<>();
 
+        var turma = (Turma) turmaRepository.findByNome(dto.getNome());
 
-        //lógica para vefiricar se o email existe ou não
-        var user = (User) userRepository.findByEmail(value.getEmail());
-
-        //caso volte um user
-        if(user != null){
-            list.add(new FieldMessage("Email", "Email já existente"));
+        if(turma != null){
+            list.add(new FieldMessage("Nome", "Turma já existente"));
         }
 
 
@@ -45,5 +45,6 @@ public class UserInsertValidator implements ConstraintValidator<UserInsertValid,
                     .addConstraintViolation();
         }
         return list.isEmpty();
+
     }
 }

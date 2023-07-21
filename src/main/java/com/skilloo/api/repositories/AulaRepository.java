@@ -30,4 +30,9 @@ public interface AulaRepository extends JpaRepository<Aula, Long> {
             "JOIN a.professor p " +
             "WHERE a.dia = :diaDaSemana AND p.id = :idUser")
     Page<Aula> buscarAulasPorDia(DayOfWeek diaDaSemana, Long idUser, Pageable pageable);
+
+    @Query(value = "SELECT a FROM Aula a " +
+            "JOIN a.turma t " +
+            "WHERE t.id = :idTurma")
+    Page<Aula> buscarAulasPorTurma(@Param("idTurma") Long idTurma ,Pageable pageable);
 }

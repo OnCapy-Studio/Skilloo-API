@@ -1,6 +1,6 @@
 package com.skilloo.api.dto.user.admin;
 
-import com.skilloo.api.services.validation.UserAdminInsertValid;
+import com.skilloo.api.services.validation.user.UserAdminInsertValid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

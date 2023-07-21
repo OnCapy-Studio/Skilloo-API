@@ -40,6 +40,8 @@ public class WebSecurityConfig {
                 .requestMatchers("/salas/**").hasRole("ADMIN")
                 .requestMatchers("/labs/**").hasRole("ADMIN")
                 .requestMatchers("/turmas/**").hasRole("ADMIN")
+                .requestMatchers("/horario/**").hasRole("ADMIN")
+                .requestMatchers("/materias/**").hasRole("ADMIN")
                 .requestMatchers("/home/**").hasRole("PROF")
                 .requestMatchers("/minhasTurmas/**").hasRole("PROF")
                 .requestMatchers("/minhasTasks/**").hasRole("PROF")

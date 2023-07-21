@@ -5,5 +5,6 @@ public enum AreasEtec {
     BASE_COMUM,
     DS,
     ADM,
-    CONTABILIDADE;
+    CONTABILIDADE,
+    TCC;
 }

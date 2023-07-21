@@ -1,8 +1,11 @@
-package com.skilloo.api.services.validation;
+package com.skilloo.api.services.validation.materia;
 
 import com.skilloo.api.controllers.exceptions.validation.FieldMessage;
-import com.skilloo.api.dto.user.admin.UserAdminInsertDTO;
+import com.skilloo.api.dto.MateriaDTO;
+import com.skilloo.api.dto.user.UserInsertDTO;
+import com.skilloo.api.entities.Materia;
 import com.skilloo.api.entities.User;
+import com.skilloo.api.repositories.MateriaRepository;
 import com.skilloo.api.repositories.ProfessorRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
@@ -11,29 +14,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserAdminInsertValidator implements ConstraintValidator<UserAdminInsertValid, UserAdminInsertDTO> {
+public class MateriaValidator implements ConstraintValidator<MateriaValid, MateriaDTO> {
 
     @Autowired
-    private ProfessorRepository userRepository;
+    private MateriaRepository materiaRepository;
+
 
     @Override
-    public void initialize(UserAdminInsertValid constraintAnnotation) {
+    public void initialize(MateriaValid constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
     @Override
-    public boolean isValid(UserAdminInsertDTO value, ConstraintValidatorContext context) {
+    public boolean isValid(MateriaDTO dto, ConstraintValidatorContext context) {
 
         //lista de erros
         List<FieldMessage> list = new ArrayList<>();
 
 
         //lógica para vefiricar se o email existe ou não
-        var user = (User) userRepository.findByEmail(value.getEmail());
+        var materia = (Materia) materiaRepository.findByNome(dto.getNome());
 
         //caso volte um user
-        if(user != null){
-            list.add(new FieldMessage("Email", "Email já existente"));
+        if(materia != null){
+            list.add(new FieldMessage("Nome", "Materia já existente"));
         }
 
 
@@ -44,5 +48,6 @@ public class UserAdminInsertValidator implements ConstraintValidator<UserAdminIn
                     .addConstraintViolation();
         }
         return list.isEmpty();
+
     }
 }

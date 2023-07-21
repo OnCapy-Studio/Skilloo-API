@@ -42,6 +42,11 @@ public class AulaService {
     }
 
     @Transactional
+    public Page<AulaDTO> buscarAulasPorTurma(Long idTurma, Pageable pageable){
+        return aulaRepository.buscarAulasPorTurma(idTurma, pageable).map(AulaDTO::new);
+    }
+
+    @Transactional
     public void verificarSeProfessorEDocenteDaAula(Long idAula, Long idProfessor){
 
         Optional<Aula> aula = aulaRepository.findById(idAula);

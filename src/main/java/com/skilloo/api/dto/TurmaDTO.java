@@ -2,6 +2,7 @@ package com.skilloo.api.dto;
 
 import com.skilloo.api.entities.Turma;
 import com.skilloo.api.entities.enuns.Periodo;
+import com.skilloo.api.services.validation.turma.TurmaValid;
 import lombok.*;
 
 @NoArgsConstructor
@@ -9,6 +10,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
+@TurmaValid
 public class TurmaDTO {
 
     private Long id;

@@ -1,4 +1,4 @@
-package com.skilloo.api.services.validation;
+package com.skilloo.api.services.validation.user;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

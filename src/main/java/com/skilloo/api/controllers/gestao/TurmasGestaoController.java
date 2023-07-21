@@ -2,6 +2,7 @@ package com.skilloo.api.controllers.gestao;
 
 import com.skilloo.api.dto.TurmaDTO;
 import com.skilloo.api.services.gestao.TurmasGestaoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,12 +25,24 @@ public class TurmasGestaoController {
     }
 
     @PostMapping
-    public ResponseEntity<TurmaDTO> insertTurma(@RequestBody TurmaDTO dto){
+    public ResponseEntity<TurmaDTO> insertTurma(@RequestBody @Valid TurmaDTO dto){
         TurmaDTO newDTO = service.insertSala(dto);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(newDTO.getId()).toUri();
 
         return ResponseEntity.created(uri).body(newDTO);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TurmaDTO> updateTurma(@PathVariable Long id, @RequestBody TurmaDTO dto){
+        //fazer validation dos dto's
+        return ResponseEntity.ok(service.updateTurma(id, dto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTurma(@PathVariable Long id){
+        service.deleteTurma(id);
+        return ResponseEntity.noContent().build();
     }
 }
