@@ -2,6 +2,8 @@ package com.skilloo.api.dto.aula;
 
 import com.skilloo.api.dto.MateriaDTO;
 import com.skilloo.api.dto.TurmaDTO;
+import com.skilloo.api.dto.user.SimpleUserDTO;
+import com.skilloo.api.dto.user.UserDTO;
 import com.skilloo.api.entities.Aula;
 import com.skilloo.api.entities.Materia;
 import com.skilloo.api.entities.Turma;
@@ -26,6 +28,7 @@ public class AulaDTO {
     private LocalTime horario;
     private MateriaDTO materia;
     private TurmaDTO turma;
+    private SimpleUserDTO professor;
 
     public AulaDTO(Aula aula) {
         id = aula.getId();
@@ -33,5 +36,6 @@ public class AulaDTO {
         dia = aula.getDia();
         horario = aula.getHorario();
         turma = new TurmaDTO(aula.getTurma());
+        professor = new SimpleUserDTO(aula.getProfessor());
     }
 }

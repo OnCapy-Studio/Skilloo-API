@@ -33,6 +33,11 @@ public interface AulaRepository extends JpaRepository<Aula, Long> {
 
     @Query(value = "SELECT a FROM Aula a " +
             "JOIN a.turma t " +
-            "WHERE t.id = :idTurma")
-    Page<Aula> buscarAulasPorTurma(@Param("idTurma") Long idTurma ,Pageable pageable);
+            "WHERE t.id = :idTurma AND a.dia = :dia")
+    Page<Aula> buscarAulasPorTurma(@Param("idTurma") Long idTurma , DayOfWeek dia, Pageable pageable);
+
+    @Query(value = "SELECT a FROM Aula a " +
+            "JOIN a.turma t " +
+            "WHERE t.id = :idTurma AND a.dia = :dia")
+    List<Aula> buscarAulasPorTurma(@Param("idTurma") Long idTurma , DayOfWeek dia);
 }

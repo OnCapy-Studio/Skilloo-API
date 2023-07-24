@@ -2,10 +2,13 @@ package com.skilloo.api.services;
 
 
 import com.skilloo.api.dto.aula.AulaDTO;
-import com.skilloo.api.dto.user.UserDTO;
+import com.skilloo.api.dto.aula.AulaInsertDTO;
 import com.skilloo.api.entities.Aula;
-import com.skilloo.api.entities.User;
+import com.skilloo.api.entities.Turma;
 import com.skilloo.api.repositories.AulaRepository;
+import com.skilloo.api.repositories.MateriaRepository;
+import com.skilloo.api.repositories.ProfessorRepository;
+import com.skilloo.api.repositories.TurmaRepository;
 import com.skilloo.api.services.exceptions.DataNotFoundException;
 import com.skilloo.api.services.exceptions.NaoAutorizadoException;
 import com.skilloo.api.services.exceptions.NenhumaAulaAtribuidaException;
@@ -28,6 +31,15 @@ public class AulaService {
     @Autowired
     private AulaRepository aulaRepository;
 
+    @Autowired
+    private ProfessorRepository professorRepository;
+
+    @Autowired
+    private MateriaRepository materiaRepository;
+
+    @Autowired
+    private TurmaRepository turmaRepository;
+
     @Transactional
     public AulaDTO findById(Long id){
 
@@ -42,8 +54,8 @@ public class AulaService {
     }
 
     @Transactional
-    public Page<AulaDTO> buscarAulasPorTurma(Long idTurma, Pageable pageable){
-        return aulaRepository.buscarAulasPorTurma(idTurma, pageable).map(AulaDTO::new);
+    public Page<AulaDTO> buscarAulasPorTurma(Long idTurma, DayOfWeek dia, Pageable pageable){
+        return aulaRepository.buscarAulasPorTurma(idTurma, dia, pageable).map(AulaDTO::new);
     }
 
     @Transactional
@@ -111,5 +123,27 @@ public class AulaService {
         }
         //definindo a variavel final do dia
         return day;
+    }
+
+    public void atualizarHorario(Long idTurma, DayOfWeek dia, List<AulaInsertDTO> dtos) {
+
+        List<Aula> aulas =  aulaRepository.buscarAulasPorTurma(idTurma, dia);
+
+        if (!aulas.isEmpty()){
+            aulas.forEach(x -> aulaRepository.delete(x));
+        }
+
+        Turma turma = turmaRepository.getReferenceById(idTurma);
+
+        dtos.forEach(dto -> {
+            Aula aula = new Aula();
+            aula.setDia(dia);
+            aula.setHorario(dto.getHorario());
+            aula.setProfessor(professorRepository.getReferenceById(dto.getProfessorId()));
+            aula.setMateria(materiaRepository.getReferenceById(dto.getMateriaId()));
+            aula.setTurma(turma);
+
+            aulaRepository.save(aula);
+        });
     }
 }
