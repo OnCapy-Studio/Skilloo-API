@@ -2,6 +2,7 @@ package com.skilloo.api.controllers.exceptions;
 
 import com.skilloo.api.controllers.exceptions.validation.ValidationError;
 import com.skilloo.api.services.exceptions.*;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class ControllerExceptionHandler {
 
 
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<StandardError> dataNotFound(RuntimeException e, HttpServletRequest request){
+    public ResponseEntity<StandardError> runtime(RuntimeException e, HttpServletRequest request){
 
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 
@@ -35,6 +36,7 @@ public class ControllerExceptionHandler {
 
         return ResponseEntity.status(status).body(error);
     }
+
 
 
 

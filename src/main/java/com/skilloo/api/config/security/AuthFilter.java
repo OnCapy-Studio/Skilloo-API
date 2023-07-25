@@ -2,6 +2,7 @@ package com.skilloo.api.config.security;
 
 import com.skilloo.api.repositories.ProfessorRepository;
 import com.skilloo.api.services.auth.TokenService;
+import com.skilloo.api.services.exceptions.NaoAutorizadoException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -40,7 +41,7 @@ public class AuthFilter extends OncePerRequestFilter {
             var user = userRepository.findByEmail(subject);
 
             if(user == null){
-                throw new BadCredentialsException("Data not found");
+                throw new NaoAutorizadoException("Data not found");
             }
 
             // confirmando a autenticação
