@@ -1,6 +1,7 @@
 package com.skilloo.api.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,7 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -20,6 +23,10 @@ public class WebSecurityConfig {
 
     @Autowired
     private AuthFilter filter;
+
+    @Autowired
+    @Qualifier("delegatedAuthenticationEntryPoint")
+    AuthenticationEntryPoint authEntryPoint;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -37,20 +44,21 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/auth/**").permitAll()
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                .requestMatchers("/users/**").hasRole("ADMIN")
+                .requestMatchers("/professores/**").hasRole("ADMIN")
                 .requestMatchers("/salas/**").hasRole("ADMIN")
                 .requestMatchers("/labs/**").hasRole("ADMIN")
                 .requestMatchers("/turmas/**").hasRole("ADMIN")
                 .requestMatchers("/horario/**").hasRole("ADMIN")
                 .requestMatchers("/materias/**").hasRole("ADMIN")
+                .requestMatchers("/suporte").hasRole("ADMIN")
                 .requestMatchers("/home/**").hasRole("PROF")
                 .requestMatchers("/minhasTurmas/**").hasRole("PROF")
                 .requestMatchers("/minhasTasks/**").hasRole("PROF")
                 .requestMatchers("/meuHorario/**").hasRole("PROF")
                 .anyRequest().authenticated()
-
                 .and()
-                .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class); //adicionando o nosso filtro antes do filtro do spring
+                .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class) //adicionando o nosso filtro antes do filtro do spring
+                .exceptionHandling().authenticationEntryPoint(authEntryPoint);;
 
         return http.build();
     }
@@ -63,5 +71,10 @@ public class WebSecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
+    }
+
+    @Bean
+    public AccessDeniedHandler failureHandler() {
+        return (request, response, ex) -> { throw ex; };
     }
 }

@@ -10,7 +10,7 @@ import com.skilloo.api.repositories.MateriaRepository;
 import com.skilloo.api.repositories.ProfessorRepository;
 import com.skilloo.api.repositories.TurmaRepository;
 import com.skilloo.api.services.exceptions.DataNotFoundException;
-import com.skilloo.api.services.exceptions.NaoAutorizadoException;
+import com.skilloo.api.services.exceptions.ForbiddenException;
 import com.skilloo.api.services.exceptions.NenhumaAulaAtribuidaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,10 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
-import java.util.TimeZone;
+import java.util.*;
 
 @Service
 public class AulaService {
@@ -68,8 +65,8 @@ public class AulaService {
             throw new DataNotFoundException("Id not found: " + idAula);
         }
 
-        if (aula.get().getProfessor().getId() != idProfessor){
-            throw new NaoAutorizadoException("Você não é o docente desta aula!");
+        if (!Objects.equals(aula.get().getProfessor().getId(), idProfessor)){
+            throw new ForbiddenException("Você não é o docente desta aula!");
         }
 
     }
@@ -92,9 +89,6 @@ public class AulaService {
         return new PageImpl<>(aulaDTOS);
     }
 
-    public void deletarAulasPorProfessor(Long idUser){
-        aulaRepository.deleteByProfessorId(idUser);
-    }
 
     @Transactional
     public boolean verificarSeProfessorTemAulasComUmaTurma(Long idUser, Long idTurma, Long idMateria){

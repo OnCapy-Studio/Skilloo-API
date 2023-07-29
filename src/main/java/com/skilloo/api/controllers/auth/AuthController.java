@@ -1,7 +1,6 @@
 package com.skilloo.api.controllers.auth;
 
 import com.skilloo.api.dto.auth.UserTokenDTO;
-import com.skilloo.api.dto.user.UserDTO;
 import com.skilloo.api.dto.user.UserInsertDTO;
 import com.skilloo.api.dto.user.admin.UserAdminInsertDTO;
 import com.skilloo.api.dto.user.UserLoginDTO;

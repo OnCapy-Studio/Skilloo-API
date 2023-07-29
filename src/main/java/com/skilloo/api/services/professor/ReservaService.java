@@ -2,14 +2,13 @@ package com.skilloo.api.services.professor;
 
 import com.skilloo.api.dto.lab.LabReservaDTO;
 import com.skilloo.api.entities.Aula;
-import com.skilloo.api.entities.Commit;
 import com.skilloo.api.entities.Lab;
 import com.skilloo.api.entities.Reserva;
 import com.skilloo.api.repositories.AulaRepository;
 import com.skilloo.api.repositories.LabRepository;
 import com.skilloo.api.repositories.ReservaRepository;
 import com.skilloo.api.services.exceptions.DataNotFoundException;
-import com.skilloo.api.services.exceptions.NaoAutorizadoException;
+import com.skilloo.api.services.exceptions.ForbiddenException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Pageable;
@@ -112,7 +111,7 @@ public class ReservaService {
 
 
         if (!Objects.equals(entity.get().getAula().getProfessor().getId(), idUser)){
-            throw new NaoAutorizadoException("Vocẽ não pode cancelar uma reserva que não seja de sua autoria.");
+            throw new ForbiddenException("Vocẽ não pode cancelar uma reserva que não seja de sua autoria.");
         }
 
         reservaRepository.deleteById(idReserva);

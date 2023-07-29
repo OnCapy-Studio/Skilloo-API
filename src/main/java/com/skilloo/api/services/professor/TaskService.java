@@ -5,7 +5,7 @@ import com.skilloo.api.entities.Task;
 import com.skilloo.api.repositories.ProfessorRepository;
 import com.skilloo.api.repositories.TaskRepository;
 import com.skilloo.api.services.exceptions.DataNotFoundException;
-import com.skilloo.api.services.exceptions.NaoAutorizadoException;
+import com.skilloo.api.services.exceptions.ForbiddenException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -44,7 +44,7 @@ public class TaskService {
             Task entity = repository.getReferenceById(idTask);
 
             if (!Objects.equals(entity.getAutor().getId(), idUser)){
-                throw new NaoAutorizadoException("Você não pode atualizar task que não seja de sua autoria!");
+                throw new ForbiddenException("Você não pode atualizar task que não seja de sua autoria!");
             }
 
             copyDtoToEntity(dto, entity);
@@ -67,7 +67,7 @@ public class TaskService {
         }
 
         if (!Objects.equals(entity.get().getAutor().getId(), idUser)){
-            throw new NaoAutorizadoException("Você não pode deletar uma task que não seja de sua autoria!");
+            throw new ForbiddenException("Você não pode deletar uma task que não seja de sua autoria!");
         }
 
         repository.deleteById(idTask);

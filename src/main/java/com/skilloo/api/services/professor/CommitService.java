@@ -3,12 +3,10 @@ package com.skilloo.api.services.professor;
 import com.skilloo.api.dto.commit.CommitDTO;
 import com.skilloo.api.dto.commit.CommitInsertDTO;
 import com.skilloo.api.entities.Commit;
-import com.skilloo.api.entities.Materia;
-import com.skilloo.api.entities.Turma;
 import com.skilloo.api.repositories.*;
 import com.skilloo.api.services.AulaService;
 import com.skilloo.api.services.exceptions.DataNotFoundException;
-import com.skilloo.api.services.exceptions.NaoAutorizadoException;
+import com.skilloo.api.services.exceptions.ForbiddenException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -43,7 +41,7 @@ public class CommitService {
         //false - ele nao tem aulas
         //true - ele tem aulas
         if(!aulaService.verificarSeProfessorTemAulasComUmaTurma(idUser, idTurma, idMateria)){
-            throw new NaoAutorizadoException("Você não tem acesso a estes commits!");
+            throw new ForbiddenException("Você não tem acesso a estes commits!");
         }
 
         return repository.buscarCommitsDaTurma(idTurma, idMateria, pageable);
@@ -53,7 +51,7 @@ public class CommitService {
     public CommitDTO insertCommit(CommitInsertDTO dto, Long idUser, Long idTurma, Long idMateria) {
 
         if(!aulaService.verificarSeProfessorTemAulasComUmaTurma(idUser, idTurma, idMateria)){
-            throw new NaoAutorizadoException("Você não tem acesso a estes commits!");
+            throw new ForbiddenException("Você não tem acesso a estes commits!");
         }
 
         Commit commit = new Commit();
@@ -67,7 +65,7 @@ public class CommitService {
             Commit entity = repository.getReferenceById(idCommit);
 
             if(!Objects.equals(entity.getAutor().getId(), idUser)){
-                throw new NaoAutorizadoException("Você não tem acesso a estes commits!");
+                throw new ForbiddenException("Você não tem acesso a estes commits!");
             }
             copyDtoToEntity(dto, entity);
             return new CommitDTO(repository.save(entity));
@@ -87,7 +85,7 @@ public class CommitService {
         }
 
         if (!Objects.equals(entity.get().getAutor().getId(), idUser)){
-            throw new NaoAutorizadoException("Vocẽ não pode deletar um commit que não seja de sua autoria.");
+            throw new ForbiddenException("Vocẽ não pode deletar um commit que não seja de sua autoria.");
         }
 
         repository.deleteById(idCommit);

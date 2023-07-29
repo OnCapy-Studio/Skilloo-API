@@ -1,4 +1,4 @@
-package com.skilloo.api.controllers;
+package com.skilloo.api.controllers.professor;
 
 import com.skilloo.api.dto.aula.AulaDTO;
 import com.skilloo.api.services.AulaService;

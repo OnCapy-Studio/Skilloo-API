@@ -8,8 +8,7 @@ import com.skilloo.api.entities.User;
 import com.skilloo.api.entities.enuns.Role;
 import com.skilloo.api.repositories.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -75,17 +74,23 @@ public class AuthService {
     //login para ADMIN, PROF
     public UserTokenDTO login(UserLoginDTO dto) {
 
-        //gerando as credenciais
-        var authenticationToken = new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getSenha());
+       try{
+           //gerando as credenciais
+           var authenticationToken = new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getSenha());
 
-        //autenticando com o sistema
-        var authentication = authenticationManager.authenticate(authenticationToken);
+           //autenticando com o sistema
+           var authentication = authenticationManager.authenticate(authenticationToken);
 
-        //gerando o token a partir do user devolvido pela autenticação
-        var user = (User) authentication.getPrincipal();
-        var tokenJWT = tokenService.gerarToken(user);
+           //gerando o token a partir do user devolvido pela autenticação
+           var user = (User) authentication.getPrincipal();
+           var tokenJWT = tokenService.gerarToken(user);
 
-        return new UserTokenDTO(user, tokenJWT);
+           return new UserTokenDTO(user, tokenJWT);
+       }
+
+       catch (InternalAuthenticationServiceException | BadCredentialsException e){
+           throw new AuthenticationCredentialsNotFoundException("Email ou Senha está incorreto");
+       }
     }
 
 

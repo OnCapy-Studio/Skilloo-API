@@ -3,18 +3,16 @@ package com.skilloo.api.services;
 import com.skilloo.api.dto.ticketsuporte.TicketSuporteDTO;
 import com.skilloo.api.dto.ticketsuporte.TicketSuporteInsertDTO;
 import com.skilloo.api.entities.TicketSuporte;
-import com.skilloo.api.entities.User;
 import com.skilloo.api.entities.enuns.Role;
 import com.skilloo.api.entities.enuns.TicketStatus;
 import com.skilloo.api.repositories.ProfessorRepository;
 import com.skilloo.api.repositories.TicketSuporteRepository;
 import com.skilloo.api.services.exceptions.DataNotFoundException;
-import com.skilloo.api.services.exceptions.NaoAutorizadoException;
+import com.skilloo.api.services.exceptions.ForbiddenException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,7 +56,7 @@ public class SuporteService {
             if((!Objects.equals(ticketSuporte.getProfessor().getId(), idUser))){
                 if(professorRepository.getReferenceById(idUser).getRole().equals(Role.PROF)) {
                     //caso o user não seja um ADMIN
-                    throw new NaoAutorizadoException("Vocẽ não pode alterar um ticket que não seja de sua autoria.");
+                    throw new ForbiddenException("Vocẽ não pode alterar um ticket que não seja de sua autoria.");
                 }
             }
 
@@ -89,7 +87,7 @@ public class SuporteService {
         if((!Objects.equals(ticketSuporte.get().getProfessor().getId(), idUser))){
             //caso o user não seja um ADMIN
             if(professorRepository.getReferenceById(idUser).getRole().equals(Role.PROF)) {
-                throw new NaoAutorizadoException("Vocẽ não pode deletar um ticket que não seja de sua autoria.");
+                throw new ForbiddenException("Vocẽ não pode deletar um ticket que não seja de sua autoria.");
             }
         }
 

@@ -2,23 +2,24 @@ package com.skilloo.api.controllers.exceptions;
 
 import com.skilloo.api.controllers.exceptions.validation.ValidationError;
 import com.skilloo.api.services.exceptions.*;
-import jakarta.servlet.ServletException;
+import com.skilloo.api.services.exceptions.ForbiddenException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.InternalAuthenticationServiceException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.Instant;
+import java.util.Arrays;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class ControllerExceptionHandler {
 
 
@@ -31,14 +32,11 @@ public class ControllerExceptionHandler {
         error.setTimestamp(Instant.now());
         error.setStatus(status.value());
         error.setError("Internal Error: " + e.getClass());
-        error.setMessage(e.getMessage());
+        error.setMessage(e.getMessage() + "Track" + Arrays.toString(e.getStackTrace()));
         error.setPath(request.getRequestURI());
 
         return ResponseEntity.status(status).body(error);
     }
-
-
-
 
     @ExceptionHandler(DataNotFoundException.class)
     public ResponseEntity<StandardError> dataNotFound(DataNotFoundException e, HttpServletRequest request){
@@ -55,31 +53,32 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(status).body(error);
     }
 
-    @ExceptionHandler(InternalAuthenticationServiceException.class)
-    public ResponseEntity<StandardError> loginError(InternalAuthenticationServiceException e, HttpServletRequest request){
 
-        HttpStatus status = HttpStatus.NOT_FOUND;
+    @ExceptionHandler(org.springframework.security.core.AuthenticationException.class)
+    public ResponseEntity<StandardError> unauthorized(AuthenticationException e, HttpServletRequest request){
+
+        HttpStatus status = HttpStatus.UNAUTHORIZED;
 
         StandardError error = new StandardError();
         error.setTimestamp(Instant.now());
         error.setStatus(status.value());
-        error.setError("Data not found!");
-        error.setMessage("Email ou Senha está incorreto: "+e.getMessage());
+        error.setError("UNAUTHORIZED");
+        error.setMessage(e.getMessage());
         error.setPath(request.getRequestURI());
 
         return ResponseEntity.status(status).body(error);
     }
 
-    @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<StandardError> loginError(BadCredentialsException e, HttpServletRequest request){
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<StandardError> forbidden(ForbiddenException e, HttpServletRequest request){
 
-        HttpStatus status = HttpStatus.NOT_FOUND;
+        HttpStatus status = HttpStatus.FORBIDDEN;
 
         StandardError error = new StandardError();
         error.setTimestamp(Instant.now());
         error.setStatus(status.value());
-        error.setError("Data not found!");
-        error.setMessage("Email ou Senha está incorreto: "+e.getMessage());
+        error.setError("FORBIDDEN!");
+        error.setMessage(e.getMessage());
         error.setPath(request.getRequestURI());
 
         return ResponseEntity.status(status).body(error);
@@ -185,20 +184,6 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(status).body(error);
     }
 
-    @ExceptionHandler(NaoAutorizadoException.class)
-    public ResponseEntity<StandardError> naoAutorizadoException(NaoAutorizadoException e, HttpServletRequest request){
 
-        HttpStatus status = HttpStatus.UNAUTHORIZED;
-
-        StandardError error = new StandardError();
-        error.setTimestamp(Instant.now());
-        error.setStatus(status.value());
-        error.setError("Não Autorizado");
-        error.setMessage(e.getMessage());
-        error.setPath(request.getRequestURI());
-
-
-        return ResponseEntity.status(status).body(error);
-    }
 
 }

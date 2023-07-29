@@ -1,14 +1,10 @@
 package com.skilloo.api.controllers.professor;
 
-import com.skilloo.api.dto.LabDTO;
-import com.skilloo.api.dto.aula.AulaDTO;
 import com.skilloo.api.dto.lab.LabReservaDTO;
-import com.skilloo.api.entities.Lab;
 import com.skilloo.api.services.AulaService;
 import com.skilloo.api.services.auth.TokenService;
 import com.skilloo.api.services.professor.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
