@@ -2,9 +2,11 @@ package com.skilloo.api.controllers.gestao;
 
 import com.skilloo.api.dto.MateriaDTO;
 import com.skilloo.api.entities.enuns.AreasEtec;
+import com.skilloo.api.services.exceptions.DatabaseException;
 import com.skilloo.api.services.gestao.MateriaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -49,7 +51,12 @@ public class MateriaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMateria(@PathVariable Long id){
 
-        service.deleteMateria(id);
-        return ResponseEntity.noContent().build();
+        try{
+            service.deleteMateria(id);
+            return ResponseEntity.noContent().build();
+        }
+        catch (DataIntegrityViolationException e){
+            throw new DatabaseException("Erro de Integridade. Você não pode deletar uma matéria tendo aulas, atribuidas a ela: " + e.getMessage());
+        }
     }
 }

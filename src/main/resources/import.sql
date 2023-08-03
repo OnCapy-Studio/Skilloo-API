@@ -134,6 +134,8 @@ INSERT INTO commit(titulo, descricao, data, turma, materia, autor) VALUES('Intro
 INSERT INTO commit(titulo, descricao, data, turma, materia, autor) VALUES('Introdução ao Java', 'System.out.print(), metodo main()', '2023-02-10 11:30:00', 7, 4, 3);
 INSERT INTO commit(titulo, descricao, data, turma, materia, autor) VALUES('Introdução ao Java', 'Estrutura de Decisão', '2023-02-17 11:30:00', 7, 4, 3);
 
+INSERT INTO commit(titulo, descricao, data, turma, materia, autor) VALUES('Introdução ao Java', 'Estrutura de Decisão', '2023-02-17 11:30:00', 2, 10, 30);
+
 
 
 INSERT INTO ticket_suporte(titulo, lab, descricao, status, professor) VALUES('PC sem Funcionar', 'Lab 3', 'Processador do PC parou de funcionar. 2 fileira, PC 3', 'PARA_RESOLVER', 2);

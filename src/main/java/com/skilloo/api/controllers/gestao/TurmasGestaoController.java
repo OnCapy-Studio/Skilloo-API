@@ -1,9 +1,11 @@
 package com.skilloo.api.controllers.gestao;
 
 import com.skilloo.api.dto.TurmaDTO;
+import com.skilloo.api.services.exceptions.DatabaseException;
 import com.skilloo.api.services.gestao.TurmasGestaoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +44,13 @@ public class TurmasGestaoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTurma(@PathVariable Long id){
-        service.deleteTurma(id);
-        return ResponseEntity.noContent().build();
+
+        try {
+            service.deleteTurma(id);
+            return ResponseEntity.noContent().build();
+        }
+        catch (DataIntegrityViolationException e){
+            throw new DatabaseException("Você não pode deletar uma turma tendo aulas atribuidas a ela.");
+        }
     }
 }

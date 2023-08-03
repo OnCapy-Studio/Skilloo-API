@@ -28,4 +28,8 @@ public class Turma {
     @JsonIgnore
     private List<Aula> aulas = new ArrayList<>();
 
+    @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Commit> commits = new ArrayList<>();
+
 }

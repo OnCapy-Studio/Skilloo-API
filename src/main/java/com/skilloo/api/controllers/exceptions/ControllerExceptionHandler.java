@@ -32,7 +32,7 @@ public class ControllerExceptionHandler {
         error.setTimestamp(Instant.now());
         error.setStatus(status.value());
         error.setError("Internal Error: " + e.getClass());
-        error.setMessage(e.getMessage() + "Track" + Arrays.toString(e.getStackTrace()));
+        error.setMessage(e.getMessage());
         error.setPath(request.getRequestURI());
 
         return ResponseEntity.status(status).body(error);
@@ -101,8 +101,8 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(status).body(error);
     }
 
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<StandardError> databaseException(DataIntegrityViolationException e, HttpServletRequest request){
+    @ExceptionHandler(DatabaseException.class)
+    public ResponseEntity<StandardError> databaseException(DatabaseException e, HttpServletRequest request){
 
         HttpStatus status = HttpStatus.BAD_REQUEST;
 

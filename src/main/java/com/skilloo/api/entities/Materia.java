@@ -30,4 +30,8 @@ public class Materia {
     @OneToMany(mappedBy = "materia")
     @JsonIgnore
     private List<Aula> aulas = new ArrayList<>();
+
+    @OneToMany(mappedBy = "materia", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Commit> commits = new ArrayList<>();
 }

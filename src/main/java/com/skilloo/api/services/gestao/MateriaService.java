@@ -5,8 +5,10 @@ import com.skilloo.api.entities.Materia;
 import com.skilloo.api.entities.enuns.AreasEtec;
 import com.skilloo.api.repositories.MateriaRepository;
 import com.skilloo.api.services.exceptions.DataNotFoundException;
+import com.skilloo.api.services.exceptions.DatabaseException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -62,7 +64,6 @@ public class MateriaService {
         if (materia.isEmpty()){
             throw new DataNotFoundException("Materia não encontrada: " + id);
         }
-
         repository.deleteById(id);
     }
 }

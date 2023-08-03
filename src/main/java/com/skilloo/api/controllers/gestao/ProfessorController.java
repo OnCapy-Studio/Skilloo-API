@@ -2,9 +2,11 @@ package com.skilloo.api.controllers.gestao;
 
 import com.skilloo.api.dto.user.UserDTO;
 import com.skilloo.api.dto.user.UserUpdateDTO;
+import com.skilloo.api.services.exceptions.DatabaseException;
 import com.skilloo.api.services.gestao.ProfessorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +38,13 @@ public class ProfessorController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProfessor(@PathVariable Long id){
-        service.deleteProfessor(id);
-        return ResponseEntity.noContent().build();
+
+        try {
+            service.deleteProfessor(id);
+            return ResponseEntity.noContent().build();
+        }
+        catch (DataIntegrityViolationException e){
+            throw new DatabaseException("Erro de Integridade. Você não pode deletar um professor tendo aulas atribuidas a ele: " + e.getMessage());
+        }
     }
 }
