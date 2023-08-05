@@ -23,7 +23,7 @@ public class Lab {
     private Long id;
     private String nome;
 
-    @OneToMany(mappedBy = "lab")
+    @OneToMany(mappedBy = "lab", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Reserva> reservas = new ArrayList<>();
 }

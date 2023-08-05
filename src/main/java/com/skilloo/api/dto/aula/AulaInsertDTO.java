@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,5 +16,5 @@ public class AulaInsertDTO {
 
     private LocalTime horario;
     private Long materiaId;
-    private Long professorId;
+    private List<Long> professoresId;
 }

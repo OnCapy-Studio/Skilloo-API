@@ -5,6 +5,7 @@ import com.skilloo.api.dto.aula.AulaDTO;
 import com.skilloo.api.dto.aula.AulaInsertDTO;
 import com.skilloo.api.entities.Aula;
 import com.skilloo.api.entities.Turma;
+import com.skilloo.api.entities.User;
 import com.skilloo.api.repositories.AulaRepository;
 import com.skilloo.api.repositories.MateriaRepository;
 import com.skilloo.api.repositories.ProfessorRepository;
@@ -65,7 +66,16 @@ public class AulaService {
             throw new DataNotFoundException("Id not found: " + idAula);
         }
 
-        if (!Objects.equals(aula.get().getProfessor().getId(), idProfessor)){
+
+        boolean isDocente = false;
+        for (User user : aula.get().getProfessores()){
+            if (Objects.equals(user.getId(), idProfessor)) {
+                isDocente = true;
+                break;
+            }
+        }
+
+        if (!isDocente){
             throw new ForbiddenException("Você não é o docente desta aula!");
         }
 
@@ -133,7 +143,7 @@ public class AulaService {
             Aula aula = new Aula();
             aula.setDia(dia);
             aula.setHorario(dto.getHorario());
-            aula.setProfessor(professorRepository.getReferenceById(dto.getProfessorId()));
+            aula.setProfessores(dto.getProfessoresId().stream().map(x -> professorRepository.getReferenceById(x)).toList());
             aula.setMateria(materiaRepository.getReferenceById(dto.getMateriaId()));
             aula.setTurma(turma);
 

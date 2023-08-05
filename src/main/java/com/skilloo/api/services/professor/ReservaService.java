@@ -4,6 +4,7 @@ import com.skilloo.api.dto.lab.LabReservaDTO;
 import com.skilloo.api.entities.Aula;
 import com.skilloo.api.entities.Lab;
 import com.skilloo.api.entities.Reserva;
+import com.skilloo.api.entities.User;
 import com.skilloo.api.repositories.AulaRepository;
 import com.skilloo.api.repositories.LabRepository;
 import com.skilloo.api.repositories.ReservaRepository;
@@ -109,8 +110,15 @@ public class ReservaService {
             throw new DataNotFoundException("Id not Found: " + idReserva);
         }
 
+        boolean isAutor = false;
+        for (User user : entity.get().getAula().getProfessores()){
+            if (Objects.equals(user.getId(), idUser)) {
+                isAutor = true;
+                break;
+            }
+        }
 
-        if (!Objects.equals(entity.get().getAula().getProfessor().getId(), idUser)){
+        if (!isAutor){
             throw new ForbiddenException("Vocẽ não pode cancelar uma reserva que não seja de sua autoria.");
         }
 

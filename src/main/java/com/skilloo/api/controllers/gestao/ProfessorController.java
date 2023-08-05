@@ -44,7 +44,7 @@ public class ProfessorController {
             return ResponseEntity.noContent().build();
         }
         catch (DataIntegrityViolationException e){
-            throw new DatabaseException("Erro de Integridade. Você não pode deletar um professor tendo aulas atribuidas a ele: " + e.getMessage());
+            throw new DatabaseException("Erro de Integridade. Você não pode deletar um professor tendo aulas ou tickets atribuidas a ele: " + e.getMessage());
         }
     }
 }

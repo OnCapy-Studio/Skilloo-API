@@ -7,6 +7,8 @@ import org.springframework.data.repository.query.Param;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "aula")
@@ -23,9 +25,12 @@ public class Aula {
     private DayOfWeek dia;
     private LocalTime horario;
 
-    @ManyToOne
-    @JoinColumn(name = "professor")
-    private User professor;
+    @ManyToMany
+    @JoinTable(
+            name = "aula_professores",
+            joinColumns = @JoinColumn(name = "aula_id"),
+            inverseJoinColumns = @JoinColumn(name = "professor_id"))
+    private List<User> professores = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "turma")

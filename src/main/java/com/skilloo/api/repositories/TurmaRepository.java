@@ -15,9 +15,10 @@ public interface TurmaRepository extends JpaRepository<Turma, Long> {
 
     @Query("SELECT t.id, t.nome, a.materia FROM Turma t " +
             "JOIN t.aulas a " +
-            "WHERE a.professor = :id " +
+            "JOIN a.professores p " +
+            "WHERE p.id = :id " +
             "GROUP BY t.nome, a.materia")
-    Page<Object[]> buscarTurmasEMateriasPorProfessor(@Param("id") User user, Pageable pageable);
+    Page<Object[]> buscarTurmasEMateriasPorProfessor(@Param("id") Long id, Pageable pageable);
 
     Turma findByNome(String nome);
 }

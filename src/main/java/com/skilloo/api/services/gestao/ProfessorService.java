@@ -91,9 +91,7 @@ public class ProfessorService implements UserDetailsService {
             throw new DataNotFoundException("Id not Found: " + id);
         }
 
-        aulaRepository.deleteByProfessorId(id);
         repository.deleteById(id);
-
     }
 
     private void copyDtoToEntity(UserInsertDTO dto, User user) {

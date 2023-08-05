@@ -16,6 +16,8 @@ import lombok.Setter;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,7 +30,7 @@ public class AulaDTO {
     private LocalTime horario;
     private MateriaDTO materia;
     private TurmaDTO turma;
-    private SimpleUserDTO professor;
+    private List<SimpleUserDTO> professores;
 
     public AulaDTO(Aula aula) {
         id = aula.getId();
@@ -36,6 +38,6 @@ public class AulaDTO {
         dia = aula.getDia();
         horario = aula.getHorario();
         turma = new TurmaDTO(aula.getTurma());
-        professor = new SimpleUserDTO(aula.getProfessor());
+        professores = aula.getProfessores().stream().map(SimpleUserDTO::new).toList();
     }
 }

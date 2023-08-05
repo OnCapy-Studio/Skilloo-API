@@ -147,7 +147,21 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(status).body(error);
     }
 
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<StandardError> dataIntegrity(DataIntegrityViolationException e, HttpServletRequest request){
 
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+
+        StandardError error = new StandardError();
+        error.setTimestamp(Instant.now());
+        error.setStatus(status.value());
+        error.setError("Data Integrity Violation Exception");
+        error.setMessage(e.getMessage());
+        error.setPath(request.getRequestURI());
+
+
+        return ResponseEntity.status(status).body(error);
+    }
 
     @ExceptionHandler(TokenException.class)
     public ResponseEntity<StandardError> validation(TokenException e, HttpServletRequest request){

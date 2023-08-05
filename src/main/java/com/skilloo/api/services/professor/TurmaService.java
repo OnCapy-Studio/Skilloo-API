@@ -33,10 +33,8 @@ public class TurmaService {
     @Transactional
     public Page<TurmaWithMateriaDTO> findAllTurmas(Pageable pageable, Long idUser) {
 
-        User user = professorRepository.getReferenceById(idUser);
-
         //retora as turmas com suas respectivas materias em formato de object
-        Page<Object[]> resultadoConsulta = repository.buscarTurmasEMateriasPorProfessor(user, pageable);
+        Page<Object[]> resultadoConsulta = repository.buscarTurmasEMateriasPorProfessor(idUser, pageable);
 
         return filtrarQuery(resultadoConsulta);
     }
