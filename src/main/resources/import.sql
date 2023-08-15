@@ -187,16 +187,16 @@ INSERT INTO task(titulo, prazo, anotacao, status, autor) VALUES('Trocar Ryzen do
 INSERT INTO task(titulo, prazo, anotacao, status, autor) VALUES('Corrigir atv do Tinkercad', '2023-03-30 13:00:00', 'Atv do Serial Monitor', 'DONE', 3);
 
 -- TCC 3º DS B
-INSERT INTO reserva(aula, horario, dia, lab) VALUES(12,'09:50:00', 'WEDNESDAY', 3);
-INSERT INTO reserva(aula, horario, dia, lab) VALUES(13,'10:40:00', 'WEDNESDAY', 3);
-INSERT INTO reserva(aula, horario, dia, lab) VALUES(14,'11:30:00', 'WEDNESDAY', 3);
+INSERT INTO reserva(aula, horario, dia, lab) VALUES(14,'09:50:00', 'WEDNESDAY', 3);
+INSERT INTO reserva(aula, horario, dia, lab) VALUES(15,'10:40:00', 'WEDNESDAY', 3);
+INSERT INTO reserva(aula, horario, dia, lab) VALUES(16,'11:30:00', 'WEDNESDAY', 3);
 
 --AULA DO ALEXANDRE - BANCO DE DADOS(2DS A) E DS (2DSB)
-INSERT INTO reserva(aula, horario, dia, lab) VALUES(21,'10:40:00', 'FRIDAY', 2);
-INSERT INTO reserva(aula, horario, dia, lab) VALUES(22,'11:30:00', 'FRIDAY', 1);
+INSERT INTO reserva(aula, horario, dia, lab) VALUES(23,'10:40:00', 'FRIDAY', 2);
+INSERT INTO reserva(aula, horario, dia, lab) VALUES(24,'11:30:00', 'FRIDAY', 1);
 
 
 --AULA TONTON 1DSB
-INSERT INTO reserva(aula, horario, dia, lab) VALUES(23,'09:50:00', 'WEDNESDAY', 2);
-INSERT INTO reserva(aula, horario, dia, lab) VALUES(24,'10:40:00', 'WEDNESDAY', 2);
-INSERT INTO reserva(aula, horario, dia, lab) VALUES(25,'11:30:00', 'WEDNESDAY', 2);
+INSERT INTO reserva(aula, horario, dia, lab) VALUES(25,'09:50:00', 'WEDNESDAY', 2);
+INSERT INTO reserva(aula, horario, dia, lab) VALUES(26,'10:40:00', 'WEDNESDAY', 2);
+INSERT INTO reserva(aula, horario, dia, lab) VALUES(27,'11:30:00', 'WEDNESDAY', 2);

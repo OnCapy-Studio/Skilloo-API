@@ -3,6 +3,7 @@ package com.skilloo.api.dto;
 import com.skilloo.api.entities.Materia;
 import com.skilloo.api.entities.enuns.AreasEtec;
 import com.skilloo.api.services.validation.materia.MateriaValid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ import lombok.Setter;
 public class MateriaDTO {
 
     private Long id;
+    @NotBlank
     private String nome;
     private AreasEtec area;
 

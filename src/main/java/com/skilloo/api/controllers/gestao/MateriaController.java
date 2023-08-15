@@ -44,7 +44,7 @@ public class MateriaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MateriaDTO> updateMateria(@PathVariable Long id, @RequestBody MateriaDTO dto){
+    public ResponseEntity<MateriaDTO> updateMateria(@PathVariable Long id, @RequestBody @Valid MateriaDTO dto){
         return ResponseEntity.ok(service.updateMateria(id, dto));
     }
 

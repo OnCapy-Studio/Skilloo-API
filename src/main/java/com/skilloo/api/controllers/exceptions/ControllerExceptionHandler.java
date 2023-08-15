@@ -57,12 +57,12 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(org.springframework.security.core.AuthenticationException.class)
     public ResponseEntity<StandardError> unauthorized(AuthenticationException e, HttpServletRequest request){
 
-        HttpStatus status = HttpStatus.UNAUTHORIZED;
+        HttpStatus status = HttpStatus.FORBIDDEN;
 
         StandardError error = new StandardError();
         error.setTimestamp(Instant.now());
         error.setStatus(status.value());
-        error.setError("UNAUTHORIZED");
+        error.setError("FORBIDDEN");
         error.setMessage(e.getMessage());
         error.setPath(request.getRequestURI());
 

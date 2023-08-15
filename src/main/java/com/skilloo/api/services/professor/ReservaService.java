@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -47,6 +48,7 @@ public class ReservaService {
 
         //para cada lab reservado
         for (Object[] obj : query){
+            System.out.println(Arrays.toString(obj));
             Long idLab = (Long) obj[0];
             String nomeLab = (String) obj[1];
             Long idReserva = (Long) obj[2];

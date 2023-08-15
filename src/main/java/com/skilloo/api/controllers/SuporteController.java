@@ -25,7 +25,7 @@ public class SuporteController {
     private TokenService tokenService;
 
 
-    @GetMapping
+    @GetMapping("/allTickets")
     public ResponseEntity<Page<TicketSuporteDTO>> findAllTickets(Pageable pageable){
 
         Page<TicketSuporteDTO> tickets = service.findAllTickets(pageable);

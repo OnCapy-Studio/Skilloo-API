@@ -3,6 +3,7 @@ package com.skilloo.api.dto;
 import com.skilloo.api.entities.Turma;
 import com.skilloo.api.entities.enuns.Periodo;
 import com.skilloo.api.services.validation.turma.TurmaValid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @NoArgsConstructor
@@ -14,6 +15,7 @@ import lombok.*;
 public class TurmaDTO {
 
     private Long id;
+    @NotBlank
     private String nome;
     private Periodo periodo;
 

@@ -50,7 +50,7 @@ public class WebSecurityConfig {
                 .requestMatchers("/turmas/**").hasRole("ADMIN")
                 .requestMatchers("/horario/**").hasRole("ADMIN")
                 .requestMatchers("/materias/**").hasRole("ADMIN")
-                .requestMatchers("/suporte").hasRole("ADMIN")
+                .requestMatchers("/suporte/allTickets").hasRole("ADMIN")
                 .requestMatchers("/home/**").hasRole("PROF")
                 .requestMatchers("/minhasTurmas/**").hasRole("PROF")
                 .requestMatchers("/minhasTasks/**").hasRole("PROF")

@@ -37,7 +37,7 @@ public class TurmasGestaoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TurmaDTO> updateTurma(@PathVariable Long id, @RequestBody TurmaDTO dto){
+    public ResponseEntity<TurmaDTO> updateTurma(@PathVariable Long id, @RequestBody @Valid TurmaDTO dto){
         //fazer validation dos dto's
         return ResponseEntity.ok(service.updateTurma(id, dto));
     }
