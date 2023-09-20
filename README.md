@@ -47,10 +47,10 @@ Após isso, a API estará rodando na porta 8080 de sua máquina.
 
 &nbsp;
 
-## Cloud | Render
+## Cloud | Azure
 É possível acessar a API na nuvem através da seguinte URL:
 ```
-https://skilloo-api.onrender.com
+https://skillooapi.ashyisland-d656732b.brazilsouth.azurecontainerapps.io
 ```
 
 &nbsp;
