@@ -21,20 +21,16 @@ public class UserDTO {
     private Long id;
     private String nome;
     private String email;
-    private Role role;
     private AreasEtec area;
     private Double pontuacao;
-    private String descricao;
     private Contrato contrato;
 
     public UserDTO(User user){
         id = user.getId();
         nome = user.getNome();
         email = user.getEmail();
-        role = user.getRole();
         area = user.getArea();
         pontuacao = user.getPontuacao();
-        descricao = user.getDescricao();
         contrato = user.getContrato();
     }
 }

@@ -29,16 +29,10 @@ public class UserInsertDTO {
     private String senha;
 
     @NotNull(message = "Campo Requirido")
-    private Role role;
-
-    @NotNull(message = "Campo Requirido")
     private AreasEtec area;
 
     @Min(1)
     private Double pontuacao;
-
-    @NotBlank
-    private String descricao;
 
     @NotNull(message = "Campo Requirido")
     private Contrato contrato;

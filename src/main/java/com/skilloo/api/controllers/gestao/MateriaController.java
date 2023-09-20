@@ -56,7 +56,7 @@ public class MateriaController {
             return ResponseEntity.noContent().build();
         }
         catch (DataIntegrityViolationException e){
-            throw new DatabaseException("Erro de Integridade. Você não pode deletar uma matéria tendo aulas, atribuidas a ela: " + e.getMessage());
+            throw new DatabaseException("Erro de Integridade. Você não pode deletar uma matéria tendo aulas, atribuidas a ela");
         }
     }
 }

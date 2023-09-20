@@ -21,20 +21,12 @@ public class UserUpdateDTO {
     @Email(message = "Insira um email valido")
     private String email;
 
-    @NotBlank
-    @Size(min = 6, max = 60, message = "Deve ter entre 6 e 60 caracteres")
-    private String senha;
-
-    @NotNull(message = "Campo Requirido")
-    private Role role;
 
     @NotNull(message = "Campo Requirido")
     private AreasEtec area;
 
     @Min(1)
     private Double pontuacao;
-    @NotBlank
-    private String descricao;
 
     @NotNull(message = "Campo Requirido")
     private Contrato contrato;

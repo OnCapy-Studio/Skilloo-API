@@ -97,10 +97,9 @@ public class ProfessorService implements UserDetailsService {
     private void copyDtoToEntity(UserInsertDTO dto, User user) {
         user.setNome(dto.getNome());
         user.setEmail(dto.getEmail());
-        user.setRole(dto.getRole());
+        user.setRole(Role.PROF);
         user.setArea(dto.getArea());
         user.setPontuacao(dto.getPontuacao());
-        user.setDescricao(dto.getDescricao());
         user.setContrato(dto.getContrato());
         user.setSenha(passwordEncoder.encode(dto.getSenha()));
     }
@@ -108,12 +107,9 @@ public class ProfessorService implements UserDetailsService {
     private void copyDtoToEntity(UserUpdateDTO dto, User user) {
         user.setNome(dto.getNome());
         user.setEmail(dto.getEmail());
-        user.setRole(dto.getRole());
         user.setArea(dto.getArea());
         user.setPontuacao(dto.getPontuacao());
-        user.setDescricao(dto.getDescricao());
         user.setContrato(dto.getContrato());
-        user.setSenha(passwordEncoder.encode(dto.getSenha()));
     }
 
     @Override

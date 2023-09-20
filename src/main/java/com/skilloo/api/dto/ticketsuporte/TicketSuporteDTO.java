@@ -19,7 +19,7 @@ public class TicketSuporteDTO {
     private String lab;
     private String descricao;
     private String status;
-    private UserDTO professor;
+    private String professor;
 
     public TicketSuporteDTO(TicketSuporte entity){
         id = entity.getId();
@@ -27,6 +27,6 @@ public class TicketSuporteDTO {
         lab = entity.getLab();
         descricao = entity.getDescricao();
         status = entity.getStatus().toString();
-        professor = new UserDTO(entity.getProfessor());
+        professor = entity.getProfessor().getNome();
     }
 }

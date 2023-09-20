@@ -40,7 +40,7 @@ public class SuporteService {
         ticketSuporte.setTitulo(dto.getTitulo());
         ticketSuporte.setDescricao(dto.getDescricao());
         ticketSuporte.setLab(dto.getLab());
-        ticketSuporte.setStatus(TicketStatus.PARA_RESOLVER);
+        ticketSuporte.setStatus(TicketStatus.Para_Resolver);
         ticketSuporte.setProfessor(professorRepository.getReferenceById(idUser));
 
         return new TicketSuporteDTO(repository.save(ticketSuporte));

@@ -25,20 +25,20 @@ public class LabReservaDTO {
     public LabReservaDTO(Lab lab){
         labId = lab.getId();
         nome = lab.getNome();
-        status = LabStatus.DISPONIVEL;
+        status = LabStatus.Disponivel;
     }
 
     public LabReservaDTO(Long id, String nomeLab, Reserva reserva, DayOfWeek dia, LocalTime horario) {
         labId = id;
         nome = nomeLab;
-        status = LabStatus.INDISPONIVEL;
+        status = LabStatus.Indisponivel;
         this.reserva = new ReservaDTO(reserva);
     }
 
     public LabReservaDTO(Lab lab, Reserva reserva){
         labId = lab.getId();
         nome = lab.getNome();
-        status = LabStatus.INDISPONIVEL;
+        status = LabStatus.Indisponivel;
         this.reserva = new ReservaDTO(reserva);
     }
 }

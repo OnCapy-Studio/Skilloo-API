@@ -57,7 +57,6 @@ public class AuthService {
         user.setEmail(dto.getEmail());
         user.setSenha(passwordEncoder.encode(dto.getSenha()));
         user.setRole(Role.PROF);
-        user.setDescricao(dto.getDescricao());
         user.setArea(dto.getArea());
         user.setContrato(dto.getContrato());
         user.setPontuacao(dto.getPontuacao());
