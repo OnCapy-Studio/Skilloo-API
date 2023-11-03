@@ -22,6 +22,11 @@ public class Lab {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    private Integer capacidade;
+    private Integer maquinas;
+    private String descricao;
+
+
 
     @OneToMany(mappedBy = "lab", cascade = CascadeType.ALL)
     @JsonIgnore

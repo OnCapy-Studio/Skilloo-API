@@ -2,6 +2,7 @@ package com.skilloo.api.services.gestao;
 
 import com.skilloo.api.dto.MateriaDTO;
 import com.skilloo.api.dto.TurmaDTO;
+import com.skilloo.api.dto.TurmaUpdateDTO;
 import com.skilloo.api.entities.Materia;
 import com.skilloo.api.entities.Turma;
 import com.skilloo.api.repositories.TurmaRepository;
@@ -34,16 +35,22 @@ public class TurmasGestaoService {
         Turma entity = new Turma();
         entity.setNome(dto.getNome());
         entity.setPeriodo(dto.getPeriodo());
+        entity.setInicio(dto.getInicio());
+        entity.setFormacao(dto.getFormacao());
+        entity.setAvaliacao(dto.getAvaliacao());
 
         return new TurmaDTO(repository.save(entity));
     }
 
     @Transactional
-    public TurmaDTO updateTurma(Long id, TurmaDTO dto) {
+    public TurmaDTO updateTurma(Long id, TurmaUpdateDTO dto) {
         try{
             Turma turma = repository.getReferenceById(id);
             turma.setNome(dto.getNome());
             turma.setPeriodo(dto.getPeriodo());
+            turma.setInicio(dto.getInicio());
+            turma.setFormacao(dto.getFormacao());
+            turma.setAvaliacao(dto.getAvaliacao());
 
             return new TurmaDTO(repository.save(turma));
         }

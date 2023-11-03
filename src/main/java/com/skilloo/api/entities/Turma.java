@@ -23,6 +23,9 @@ public class Turma {
     private String nome;
     @Enumerated(EnumType.STRING)
     private Periodo periodo;
+    private Integer inicio;
+    private Integer formacao;
+    private Double avaliacao;
 
     @OneToMany(mappedBy = "turma")
     @JsonIgnore

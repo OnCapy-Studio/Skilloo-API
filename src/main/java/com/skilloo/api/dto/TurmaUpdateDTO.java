@@ -2,7 +2,6 @@ package com.skilloo.api.dto;
 
 import com.skilloo.api.entities.Turma;
 import com.skilloo.api.entities.enuns.Periodo;
-import com.skilloo.api.services.validation.turma.TurmaValid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
@@ -11,9 +10,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-@TurmaValid
-public class TurmaDTO {
-
+public class TurmaUpdateDTO {
     private Long id;
     @NotBlank
     private String nome;
@@ -22,7 +19,7 @@ public class TurmaDTO {
     private Integer formacao;
     private Double avaliacao;
 
-    public TurmaDTO(Turma entity){
+    public TurmaUpdateDTO(Turma entity){
         id = entity.getId();
         nome = entity.getNome();
         periodo = entity.getPeriodo();
@@ -30,5 +27,4 @@ public class TurmaDTO {
         formacao = entity.getFormacao();
         avaliacao = entity.getAvaliacao();
     }
-
 }

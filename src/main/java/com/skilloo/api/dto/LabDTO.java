@@ -16,9 +16,15 @@ public class LabDTO {
     private Long id;
     @NotBlank
     private String nome;
+    private Integer capacidade;
+    private Integer maquinas;
+    private String descricao;
 
     public LabDTO(Lab entity){
         id = entity.getId();
         nome = entity.getNome();
+        capacidade = entity.getCapacidade();
+        maquinas = entity.getMaquinas();
+        descricao = entity.getDescricao();
     }
 }

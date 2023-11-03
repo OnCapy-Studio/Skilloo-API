@@ -1,6 +1,7 @@
 package com.skilloo.api.controllers.gestao;
 
 import com.skilloo.api.dto.TurmaDTO;
+import com.skilloo.api.dto.TurmaUpdateDTO;
 import com.skilloo.api.services.exceptions.DatabaseException;
 import com.skilloo.api.services.gestao.TurmasGestaoService;
 import jakarta.validation.Valid;
@@ -37,7 +38,7 @@ public class TurmasGestaoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TurmaDTO> updateTurma(@PathVariable Long id, @RequestBody @Valid TurmaDTO dto){
+    public ResponseEntity<TurmaDTO> updateTurma(@PathVariable Long id, @RequestBody @Valid TurmaUpdateDTO dto){
         //fazer validation dos dto's
         return ResponseEntity.ok(service.updateTurma(id, dto));
     }

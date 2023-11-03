@@ -31,15 +31,15 @@ INSERT INTO tb_user(nome, email, senha, role, area, pontuacao, descricao, contra
 INSERT INTO tb_user(nome, email, senha, role, area, pontuacao, descricao, contrato) VALUES('Luciano', 'luciano@etec.sp.gov.br', '$2a$12$/W5hhScuzX4B06R/Di88g.aJf7U3jMOZmXlGpE0R4JNKGqj8CkBf6', 'PROF', 'DS', 295, 'Descrição 27', 'CLT');
 
 
-INSERT INTO turma(nome, periodo) VALUES('1º ADM-A', 'Manha');
-INSERT INTO turma(nome, periodo) VALUES('2º ADM-A', 'Manha');
-INSERT INTO turma(nome, periodo) VALUES('3º ADM-A', 'Manha');
-INSERT INTO turma(nome, periodo) VALUES('1º DS-A', 'Manha');
-INSERT INTO turma(nome, periodo) VALUES('1º DS-B', 'Manha');
-INSERT INTO turma(nome, periodo) VALUES('2º DS-A', 'Manha');
-INSERT INTO turma(nome, periodo) VALUES('2º DS-B', 'Manha');
-INSERT INTO turma(nome, periodo) VALUES('3º DS-A', 'Manha');
-INSERT INTO turma(nome, periodo) VALUES('3º DS-B', 'Manha');
+INSERT INTO turma(nome, periodo, inicio, formacao, avaliacao) VALUES('1º ADM-A', 'Manha', 2023, 2025, 5.0);
+INSERT INTO turma(nome, periodo, inicio, formacao, avaliacao) VALUES('2º ADM-A', 'Manha', 2022, 2024, 5.0);
+INSERT INTO turma(nome, periodo, inicio, formacao, avaliacao) VALUES('3º ADM-A', 'Manha', 2021, 2023, 5.0);
+INSERT INTO turma(nome, periodo, inicio, formacao, avaliacao) VALUES('1º DS-A', 'Manha', 2023, 2025, 5.0);
+INSERT INTO turma(nome, periodo, inicio, formacao, avaliacao) VALUES('1º DS-B', 'Manha', 2023, 2025, 5.0);
+INSERT INTO turma(nome, periodo, inicio, formacao, avaliacao) VALUES('2º DS-A', 'Manha', 2022, 2024, 5.0);
+INSERT INTO turma(nome, periodo, inicio, formacao, avaliacao) VALUES('2º DS-B', 'Manha', 2022, 2024, 5.0);
+INSERT INTO turma(nome, periodo, inicio, formacao, avaliacao) VALUES('3º DS-A', 'Manha', 2021, 2022, 5.0);
+INSERT INTO turma(nome, periodo, inicio, formacao, avaliacao) VALUES('3º DS-B', 'Manha', 2021, 2023, 5.0);
 
 INSERT INTO materia(nome, area) VALUES('PDTCC', 'Base_Comum');
 INSERT INTO materia (nome, area) VALUES ('Lingua Portuguesa', 'Base_Comum');
@@ -175,11 +175,11 @@ INSERT INTO ticket_suporte(titulo, lab, descricao, status, professor) VALUES('Da
 INSERT INTO ticket_suporte(titulo, lab, descricao, status, professor) VALUES('Tomada explodiu', 'Sala 2', 'Ligaram e explodiu', 'Para_Resolver', 3);
 
 
-INSERT INTO lab(nome) VALUES('Laboratório 1');
-INSERT INTO lab(nome) VALUES('Laboratório 2');
-INSERT INTO lab(nome) VALUES('Laboratório 3');
-INSERT INTO lab(nome) VALUES('Laboratório Audiovisual');
-INSERT INTO lab(nome) VALUES('Sala Maker');
+INSERT INTO lab(nome, capacidade, maquinas, descricao) VALUES('Laboratório 1', 60, 30, 'Desktop I5 | 8gb RAM');
+INSERT INTO lab(nome, capacidade, maquinas, descricao) VALUES('Laboratório 2', 60, 30, 'Desktop I5 | 8gb RAM');
+INSERT INTO lab(nome, capacidade, maquinas, descricao) VALUES('Laboratório 3', 40, 20, 'Desktop Ryzen 5 | 8gb RAM');
+INSERT INTO lab(nome, capacidade, maquinas, descricao) VALUES('Laboratório Audiovisual', 40, 20, 'Desktop I5 | 8Gb RAM');
+INSERT INTO lab(nome, capacidade, maquinas, descricao) VALUES('Sala Maker', 30, 15, 'Notebook Thinkpad');
 
 INSERT INTO task(titulo, prazo, anotacao, status, autor) VALUES('Corrigir redações enem', '2023-02-28 13:00:00', 'Tema: Seria Abel Ferreira o maior português que pisou no brasil?','To_Do', 2);
 INSERT INTO task(titulo, prazo, anotacao, status, autor) VALUES('Ler machado de assis', '2023-02-28 12:00:00', 'Estou na Pag 80', 'Doing', 2);

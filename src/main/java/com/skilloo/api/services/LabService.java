@@ -27,7 +27,7 @@ public class LabService {
 
     @Transactional
     public LabDTO insertLab(LabDTO dto) {
-        Lab lab = new Lab(null, dto.getNome(), new ArrayList<>());
+        Lab lab = new Lab(null, dto.getNome(), dto.getCapacidade(), dto.getMaquinas(), dto.getDescricao(), new ArrayList<>());
         return new LabDTO(repository.save(lab));
     }
 
@@ -37,6 +37,9 @@ public class LabService {
         try{
             Lab entity = repository.getReferenceById(id);
             entity.setNome(dto.getNome());
+            entity.setCapacidade(dto.getCapacidade());
+            entity.setMaquinas(dto.getMaquinas());
+            entity.setDescricao(dto.getDescricao());
 
             return new LabDTO(repository.save(entity));
         }
